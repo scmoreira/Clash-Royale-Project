@@ -7,7 +7,6 @@ const User = require("../models/user.model")
 const bcrypt = require("bcrypt")
 const bcryptSalt = 10
 
-
 // User signup
 router.get("/signup", (req, res) => res.render("auth/signup"))
 router.post("/signup", (req, res, next) => {
@@ -15,14 +14,14 @@ router.post("/signup", (req, res, next) => {
     const { username, password } = req.body
 
     if (!username || !password) {
-        res.render("auth/signup", { errorMsg: "Rellena el usuario y la contraseña" })
+        res.render("auth/signup", { errorMsg: "Enter usarname and password" })
         return
     }
 
     User.findOne({ username })
         .then(user => {
             if (user) {
-                res.render("auth/signup", { errorMsg: "El usuario ya existe en la BBDD" })
+                res.render("auth/signup", { errorMsg: "User already registered!" })
                 return
             }
             const salt = bcrypt.genSaltSync(bcryptSalt)
@@ -30,11 +29,10 @@ router.post("/signup", (req, res, next) => {
 
             User.create({ username, password: hashPass })
                 .then(() => res.redirect("/"))
-                .catch(() => res.render("auth/signup", { errorMsg: "No se pudo crear el usuario" }))
+                .catch(() => res.render("auth/signup", { errorMsg: "An error has ocurred!" }))
         })
         .catch(error => next(error))
 })
-
 
 // User login
 router.get('/login', (req, res) => res.render('auth/login', { "errorMsg": req.flash("error") }))
@@ -45,7 +43,6 @@ router.post('/login', passport.authenticate("local", {
     passReqToCallback: true,
     badRequestMessage: 'Rellena todos los campos'
 }))
-
 
 // User logout
 router.get("/logout", (req, res) => {
