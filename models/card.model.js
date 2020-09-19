@@ -3,8 +3,11 @@ const Schema = mongoose.Schema
 
 const cardSchema = new Schema({
     name: String,
-    description: String,
-    image: String
+    id: Number,
+    maxlevel: String,
+    iconUrls: {
+        medium: String
+    }
 }, {
     timestamps: true
 })
