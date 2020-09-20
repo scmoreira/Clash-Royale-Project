@@ -4,7 +4,10 @@ const Schema = mongoose.Schema
 const locationSchema = new Schema ({
 
     id: Number,
-    name: String
+    name: {
+        type: String,
+        lowercase: true
+    }
 }, {
     timestamps: true
 })

@@ -49,4 +49,23 @@ h1, h2, h3 {
   display: flex;
   justify-content: center; }
 
+.countryForm {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .countryForm label {
+    font-size: 1.4em;
+    font-weight: 400; }
+  .countryForm input[type=text] {
+    height: 39px;
+    width: 225px; }
+
+.countryForm form {
+  justify-content: center;
+  align-items: center; }
+
+.ranking div {
+  padding: 0px; }
+
 /*# sourceMappingURL=style.css.map */
