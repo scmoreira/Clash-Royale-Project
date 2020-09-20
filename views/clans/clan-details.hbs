@@ -1,28 +1,27 @@
-
-
-
-
 <div class="container">
     <div class="row">
-        <h1>{{name}}</h1>
+        <h1>{{dataClan.name}}</h1>
         <div class="col-12">
-            <p><strong>Description : </strong>{{description}}</p>
+            <p><strong>Description : </strong>{{dataClan.description}}</p>
             <hr>
         </div>
     </div>
     <div class="row">
         <div class="col-3">
-            <p class="icon"><img src="/images/trophy (1).png"><strong>Score : </strong>{{clanScore}}</p>
+            <p class="icon"><img src="/images/trophy (1).png"><strong> Score : </strong>{{dataClan.clanScore}}</p>
         </div>
         <div class="col-3 icon">
-            <p><img src="https://cdn.royaleapi.com/static/img/ui/trophy-ribbon.png?t=e3bfef03e1feb9f37f803395f2bd91d35daf4742" alt="">
-<strong>Clan War Trophies : </strong>{{clanWarTrophies}}</p>
+            <p><img src="https://cdn.royaleapi.com/static/img/ui/trophy-ribbon.png?t=e3bfef03e1feb9f37f803395f2bd91d35daf4742"
+                    alt="">
+                <strong> Clan War Trophies : </strong>{{dataClan.clanWarTrophies}}</p>
         </div>
         <div class="col-3">
-            <p><strong>Country : </strong>{{location.name}}</p>
+            <p class="icon"><img src="{{countryFlag}}"><strong> Country : </strong>{{dataClan.location.name}}</p>
         </div>
         <div class="col-3">
-            <p class="icon"><img src="https://cdn.royaleapi.com/static/img/ui/social.png?t=3402cda4605fdc1189720f967030b63f742900f3"><strong>Members : </strong>{{members}}</p>
+            <p class="icon"><img
+                    src="https://cdn.royaleapi.com/static/img/ui/social.png?t=3402cda4605fdc1189720f967030b63f742900f3">
+                <strong> Members : </strong>{{dataClan.members}}</p>
         </div>
     </div>
     <hr>
@@ -32,27 +31,31 @@
         </div>
     </div>
     <div class="row">
-        {{#each memberList}}
+        {{#each dataClan.memberList}}
         <div class=" col-4 card w-50">
             <div class="card-body">
                 <h5 class="card-title">{{name}}</h5>
                 <hr>
                 <div class="row">
-
                     <div class="col-6 icon" style="padding: 0px;">
-                        <p class="card-text icon"><img src="https://cdn.royaleapi.com/static/img/ui/people.png?t=655d74ddf722b295b010e92d7495a3e21d178cb0"><strong>Role : </strong>{{role}}</p>
-                        <p class="card-text icon"><img src="/images/rank.png"<strong>Clan Rank : </strong>{{clanRank}}</p>
+                        <p class="card-text icon"><img
+                                src="https://cdn.royaleapi.com/static/img/ui/people.png?t=655d74ddf722b295b010e92d7495a3e21d178cb0"><strong>
+                                Role : </strong>{{role}}</p>
+                        <p class="card-text icon"><img src="/images/rank.png"><strong> Clan Rank : </strong>{{clanRank}}
+                        </p>
                     </div>
                     <div class="col-6 icon" style="padding: 0px;">
-                        <p class="card-text icon"><img src="/images/exp.png"><strong>Exp Level : </strong>{{expLevel}}</p>
-                        <p class="card-text"><img src="https://cdn.royaleapi.com/static/img/ui/trophy-ribbon.png?t=e3bfef03e1feb9f37f803395f2bd91d35daf4742" alt=""><strong>Trophies : </strong>{{trophies}}</p>
+                        <p class="card-text icon"><img src="/images/exp.png"><strong> Exp Level : </strong>{{expLevel}}
+                        </p>
+                        <p class="card-text"><img
+                                src="https://cdn.royaleapi.com/static/img/ui/trophy-ribbon.png?t=e3bfef03e1feb9f37f803395f2bd91d35daf4742"
+                                alt=""><strong> Trophies : </strong>{{trophies}}</p>
                     </div>
-                </div>                             
+                </div>
             </div>
         </div>
         {{/each}}
-    </div>    
-
+    </div>
 </div>
 
 {{!-- background-image:url(https://cdn.royaleapi.com/static/img/ui/trophy-ribbon.png?t=e3bfef03e1feb9f37f803395f2bd91d35daf4742) --}}
