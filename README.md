@@ -18,7 +18,6 @@ Ironhack Back-End Project to create an API Web.
 
 | Method | Path   | Description |
 | --------------------- | --------------------- | --------------------- |
-
 | `GET` | / | See Home page |
 | `GET` | /signup | See the Signup form |
 | `POST` | /signup | Submit the Signup form |

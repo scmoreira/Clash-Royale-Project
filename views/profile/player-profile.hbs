@@ -1,1 +1,33 @@
-<h1>Estoy en Player-Profile!!!!!!</h1>
+<div class="container">
+    <div class="row playerTitle">
+        <h1>Welcome {{name}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-4 icon playerDefault" >
+            <hr>
+            <p><img src ="/images/explevel.png" alt="Exp level"><strong> Exp. Level: </strong>{{expLevel}}</p>
+            <hr>
+            <p><img src="/images/trophy (1).png" alt="trophy"><strong> Trophies: </strong>{{trophies}}</p>
+            <hr>
+            <p><img src="/images/exp.png" alt="clan"><strong> Clan: </strong>{{clan.name}}</p>
+            <hr>
+            <p><img src="https://cdn.royaleapi.com/static/img/ui/people.png?t=655d74ddf722b295b010e92d7495a3e21d178cb0" alt="role"><strong> Role: </strong>{{role}}</p>
+            <hr>
+        </div>
+        <div class="col-8 divDeck" >
+            <div class="row">
+                {{#each currentDeck}}
+                <div class="col-3" style="padding: 5px;">
+                    <div class="card playerDeck" style="width: 9rem;">
+                        <img src="{{iconUrls.medium}}" class="card-img-top" alt="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{name}}</h5>
+                            <p class="card-text"><strong>Level : </strong>{{level}} / {{maxLevel}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

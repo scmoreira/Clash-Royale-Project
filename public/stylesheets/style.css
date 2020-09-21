@@ -5,7 +5,9 @@ h1, h2, h3 {
   font-weight: 200; }
 
 .navbar {
-  margin-bottom: 70px; }
+  margin-bottom: 70px;
+  position: fixed;
+  width: 100%; }
 
 #errorMsg {
   background-color: red;
@@ -42,8 +44,25 @@ h1, h2, h3 {
 
 .userDeck {
   background: url("../images/backgroundWood.jpg");
-  width: 80%;
+  width: 100%;
   min-height: 200px; }
+  .userDeck .row {
+    margin-left: 0px;
+    margin-right: -50px; }
+
+.deckUser {
+  margin: 10px 15px;
+  display: inline-block;
+  position: relative; }
+
+.deckUser input {
+  position: absolute;
+  top: 0.2em;
+  left: 0.2em;
+  border-radius: 50px;
+  color: white;
+  text-transform: uppercase;
+  padding: 0px 7px; }
 
 .userCards {
   display: flex;
@@ -66,6 +85,49 @@ h1, h2, h3 {
   align-items: center; }
 
 .ranking div {
-  padding: 0px; }
+  padding: 0px;
+  color: #e2f8ff; }
+
+.playerDeck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(248, 219, 186, 0.698); }
+  .playerDeck img {
+    width: 90px;
+    object-fit: cover; }
+  .playerDeck h5 {
+    font-size: 1em; }
+  .playerDeck div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px; }
+
+.divDeck {
+  background-image: url(/images/backgroundWood.jpg);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 5px 15px 5px 40px; }
+
+.playerTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .playerTitle h1 {
+    font-size: 4em;
+    font-weight: 700;
+    margin-bottom: 30px; }
+
+.playerDefault {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e2f8ff;
+  border: 5px groove #c4e8f3;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px; }
 
 /*# sourceMappingURL=style.css.map */

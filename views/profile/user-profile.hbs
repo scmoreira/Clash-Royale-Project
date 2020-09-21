@@ -1,17 +1,39 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h1>Welcome {{username}}</h1>
+            <h1>Welcome {{user.username}}</h1>
         </div>
         <div class="col-6 d-flex justify-content-end">
-                <a class="btn btn-dark btn-lg btnEdit"  href="/profile/edit/{{id}}" > Edit </a>                                
+            <form action="/profile/player" method="post">
+                <label>Insert your player tag</label>
+                <input type='text' name="tag" placeholder="#975A1R">
+                <input type="submit" value="Go" class="btn btn-md btn-dark ">
+            </form>
+            <a class="btn btn-dark btn-md btnEdit"  href="/profile/edit/{{user.id}}" > Edit </a>                                
         </div>        
     </div>
     <hr>
 </div>
 <h5 class="userCards">Your favourite cards</h5>
-<div class="container userDeck">
-   
+<div class="container userDeck" id="userDeck">
+    <div class="row">
+        {{#each arrayCards}}
+        <div class="col-2 deckUser">
+            <div class="card" style="width: 9rem;">
+                <img src="{{iconUrls.medium}}" class="card-img-top" alt="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{name}}</h5>
+                    <p class="card-text"><strong>Max.Level: </strong>{{maxLevel}}</p>
+                    <form action="/profile/delete/{{id}}" method="GET">
+                        <input type="submit" class="btn btn-danger delete" value="X">
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        {{/each}}
+    </div>
+    
 </div>
 <div class="container countryForm" style="margin-top: 25px;">
     <form action="/profile" method="post">
