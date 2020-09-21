@@ -1,7 +1,7 @@
-
 <div class="container justify-content-center">
     <h1 class="card-title">Cards list</h1>
     <div class="row">
+
 {{#each datos}}
 <div class="col-2">
     <div class="card" style="width: 10rem;">
@@ -9,11 +9,12 @@
         <div class="card-body">
             <h5 class="card-title">{{name}}</h5>
             <p class="card-text"><strong>Max. Level : </strong>{{maxLevel}}</p>
-            <a href="#" class="btn btn-dark ">like</a>
+            {{!-- {{#if isCheck}} --}}
+            <a href="/cards/{{id}}" class="btn btn-dark " id="btnLike">like</a>
+            {{!-- {{/if}} --}}
         </div>
     </div>
 </div>
-
 {{/each}}
 
     </div>

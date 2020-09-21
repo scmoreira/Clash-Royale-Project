@@ -1,1574 +1,807 @@
 const mongoose = require('mongoose')
 
-const Location = require('../models/location.model.js')
+const Card = require('../models/card.model.js')
 
 mongoose.connect('mongodb://localhost/Clash-royal-project', {useUnifiedTopology: true, useNewUrlParser: true})
 
-Location.collection.drop()
+Card.collection.drop()
 
-const locations = [{
-        "id": 57000000,
-        "name": "Europe",
-        "isCountry": false
+const cards = [{
+        'name': 'Knight',
+        'id': 26000000,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/jAj1Q5rclXxU9kVImGqSJxa4wEMfEhvwNQ_4jiGUuqg.png'
+        }
+    },
+    {
+        'name': 'Archers',
+        'id': 26000001,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/W4Hmp8MTSdXANN8KdblbtHwtsbt0o749BbxNqmJYfA8.png'
+        }
+    },
+    {
+        'name': 'Goblins',
+        'id': 26000002,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/X_DQUye_OaS3QN6VC9CPw05Fit7wvSm3XegXIXKP--0.png'
+        }
+    },
+    {
+        'name': 'Giant',
+        'id': 26000003,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Axr4ox5_b7edmLsoHxBX3vmgijAIibuF6RImTbqLlXE.png'
+        }
+    },
+    {
+        'name': 'P.E.K.K.A',
+        'id': 26000004,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/MlArURKhn_zWAZY-Xj1qIRKLVKquarG25BXDjUQajNs.png'
+        }
+    },
+    {
+        'name': 'Minions',
+        'id': 26000005,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/yHGpoEnmUWPGV_hBbhn-Kk-Bs838OjGzWzJJlQpQKQA.png'
+        }
+    },
+    {
+        'name': 'Balloon',
+        'id': 26000006,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/qBipxLo-3hhCnPrApp2Nn3b2NgrSrvwzWytvREev0CY.png'
+        }
+    },
+    {
+        'name': 'Witch',
+        'id': 26000007,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/cfwk1vzehVyHC-uloEIH6NOI0hOdofCutR5PyhIgO6w.png'
+        }
+    },
+    {
+        'name': 'Barbarians',
+        'id': 26000008,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/TvJsuu2S4yhyk1jVYUAQwdKOnW4U77KuWWOTPOWnwfI.png'
+        }
+    },
+    {
+        'name': 'Golem',
+        'id': 26000009,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/npdmCnET7jmVjJvjJQkFnNSNnDxYHDBigbvIAloFMds.png'
+        }
+    },
+    {
+        'name': 'Skeletons',
+        'id': 26000010,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/oO7iKMU5m0cdxhYPZA3nWQiAUh2yoGgdThLWB1rVSec.png'
+        }
+    },
+    {
+        'name': 'Valkyrie',
+        'id': 26000011,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/0lIoYf3Y_plFTzo95zZL93JVxpfb3MMgFDDhgSDGU9A.png'
+        }
+    },
+    {
+        'name': 'Skeleton Army',
+        'id': 26000012,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/fAOToOi1pRy7svN2xQS6mDkhQw2pj9m_17FauaNqyl4.png'
+        }
     },
     {
-        "id": 57000001,
-        "name": "North America",
-        "isCountry": false
+        'name': 'Bomber',
+        'id': 26000013,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/12n1CesxKIcqVYntjxcF36EFA-ONw7Z-DoL0_rQrbdo.png'
+        }
     },
     {
-        "id": 57000002,
-        "name": "South America",
-        "isCountry": false
+        'name': 'Musketeer',
+        'id': 26000014,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Tex1C48UTq9FKtAX-3tzG0FJmc9jzncUZG3bb5Vf-Ds.png'
+        }
     },
     {
-        "id": 57000003,
-        "name": "Asia",
-        "isCountry": false
+        'name': 'Baby Dragon',
+        'id': 26000015,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/cjC9n4AvEZJ3urkVh-rwBkJ-aRSsydIMqSAV48hAih0.png'
+        }
     },
     {
-        "id": 57000004,
-        "name": "Oceania",
-        "isCountry": false
+        'name': 'Prince',
+        'id': 26000016,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/3JntJV62aY0G1Qh6LIs-ek-0ayeYFY3VItpG7cb9I60.png'
+        }
     },
     {
-        "id": 57000005,
-        "name": "Africa",
-        "isCountry": false
+        'name': 'Wizard',
+        'id': 26000017,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Mej7vnv4H_3p_8qPs_N6_GKahy6HDr7pU7i9eTHS84U.png'
+        }
     },
     {
-        "id": 57000006,
-        "name": "International",
-        "isCountry": false
+        'name': 'Mini P.E.K.K.A',
+        'id': 26000018,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Fmltc4j3Ve9vO_xhHHPEO3PRP3SmU2oKp2zkZQHRZT4.png'
+        }
     },
     {
-        "id": 57000007,
-        "name": "Afghanistan",
-        "isCountry": true,
-        "countryCode": "AF"
+        'name': 'Spear Goblins',
+        'id': 26000019,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/FSDFotjaXidI4ku_WFpVCTWS1hKGnFh1sxX0lxM43_E.png'
+        }
     },
     {
-        "id": 57000008,
-        "name": "Åland Islands",
-        "isCountry": true,
-        "countryCode": "AX"
+        'name': 'Giant Skeleton',
+        'id': 26000020,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/0p0gd0XaVRu1Hb1iSG1hTYbz2AN6aEiZnhaAib5O8Z8.png'
+        }
     },
     {
-        "id": 57000009,
-        "name": "Albania",
-        "isCountry": true,
-        "countryCode": "AL"
+        'name': 'Hog Rider',
+        'id': 26000021,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Ubu0oUl8tZkusnkZf8Xv9Vno5IO29Y-jbZ4fhoNJ5oc.png'
+        }
     },
     {
-        "id": 57000010,
-        "name": "Algeria",
-        "isCountry": true,
-        "countryCode": "DZ"
+        'name': 'Minion Horde',
+        'id': 26000022,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Wyjq5l0IXHTkX9Rmpap6HaH08MvjbxFp1xBO9a47YSI.png'
+        }
     },
     {
-        "id": 57000011,
-        "name": "American Samoa",
-        "isCountry": true,
-        "countryCode": "AS"
+        'name': 'Ice Wizard',
+        'id': 26000023,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/W3dkw0HTw9n1jB-zbknY2w3wHuyuLxSRIAV5fUT1SEY.png'
+        }
     },
     {
-        "id": 57000012,
-        "name": "Andorra",
-        "isCountry": true,
-        "countryCode": "AD"
+        'name': 'Royal Giant',
+        'id': 26000024,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/mnlRaNtmfpQx2e6mp70sLd0ND-pKPF70Cf87_agEKg4.png'
+        }
     },
     {
-        "id": 57000013,
-        "name": "Angola",
-        "isCountry": true,
-        "countryCode": "AO"
+        'name': 'Guards',
+        'id': 26000025,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/1ArKfLJxYo6_NU_S9cAeIrfbXqWH0oULVJXedxBXQlU.png'
+        }
     },
     {
-        "id": 57000014,
-        "name": "Anguilla",
-        "isCountry": true,
-        "countryCode": "AI"
+        'name': 'Princess',
+        'id': 26000026,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/bAwMcqp9EKVIKH3ZLm_m0MqZFSG72zG-vKxpx8aKoVs.png'
+        }
     },
     {
-        "id": 57000015,
-        "name": "Antarctica",
-        "isCountry": true,
-        "countryCode": "AQ"
+        'name': 'Dark Prince',
+        'id': 26000027,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/M7fXlrKXHu2IvpSGpk36kXVstslbR08Bbxcy0jQcln8.png'
+        }
     },
     {
-        "id": 57000016,
-        "name": "Antigua and Barbuda",
-        "isCountry": true,
-        "countryCode": "AG"
+        'name': 'Three Musketeers',
+        'id': 26000028,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/_J2GhbkX3vswaFk1wG-dopwiHyNc_YiPhwroiKF3Mek.png'
+        }
     },
     {
-        "id": 57000017,
-        "name": "Argentina",
-        "isCountry": true,
-        "countryCode": "AR"
+        'name': 'Lava Hound',
+        'id': 26000029,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/unicRQ975sBY2oLtfgZbAI56ZvaWz7azj-vXTLxc0r8.png'
+        }
     },
     {
-        "id": 57000018,
-        "name": "Armenia",
-        "isCountry": true,
-        "countryCode": "AM"
+        'name': 'Ice Spirit',
+        'id': 26000030,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/lv1budiafU9XmSdrDkk0NYyqASAFYyZ06CPysXKZXlA.png'
+        }
     },
     {
-        "id": 57000019,
-        "name": "Aruba",
-        "isCountry": true,
-        "countryCode": "AW"
+        'name': 'Fire Spirits',
+        'id': 26000031,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/16-BqusVvynIgYI8_Jci3LDC-r8AI_xaIYLgXqtlmS8.png'
+        }
     },
     {
-        "id": 57000020,
-        "name": "Ascension Island",
-        "isCountry": true,
-        "countryCode": "AC"
+        'name': 'Miner',
+        'id': 26000032,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Y4yWvdwBCg2FpAZgs8T09Gy34WOwpLZW-ttL52Ae8NE.png'
+        }
     },
     {
-        "id": 57000021,
-        "name": "Australia",
-        "isCountry": true,
-        "countryCode": "AU"
+        'name': 'Sparky',
+        'id': 26000033,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/2GKMkBrArZXgQxf2ygFjDs4VvGYPbx8F6Lj_68iVhIM.png'
+        }
     },
     {
-        "id": 57000022,
-        "name": "Austria",
-        "isCountry": true,
-        "countryCode": "AT"
+        'name': 'Bowler',
+        'id': 26000034,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/SU4qFXmbQXWjvASxVI6z9IJuTYolx4A0MKK90sTIE88.png'
+        }
     },
     {
-        "id": 57000023,
-        "name": "Azerbaijan",
-        "isCountry": true,
-        "countryCode": "AZ"
+        'name': 'Lumberjack',
+        'id': 26000035,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/E6RWrnCuk13xMX5OE1EQtLEKTZQV6B78d00y8PlXt6Q.png'
+        }
     },
     {
-        "id": 57000024,
-        "name": "Bahamas",
-        "isCountry": true,
-        "countryCode": "BS"
+        'name': 'Battle Ram',
+        'id': 26000036,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/dyc50V2cplKi4H7pq1B3I36pl_sEH5DQrNHboS_dbbM.png'
+        }
     },
     {
-        "id": 57000025,
-        "name": "Bahrain",
-        "isCountry": true,
-        "countryCode": "BH"
+        'name': 'Inferno Dragon',
+        'id': 26000037,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/y5HDbKtTbWG6En6TGWU0xoVIGs1-iQpIP4HC-VM7u8A.png'
+        }
     },
     {
-        "id": 57000026,
-        "name": "Bangladesh",
-        "isCountry": true,
-        "countryCode": "BD"
+        'name': 'Ice Golem',
+        'id': 26000038,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/r05cmpwV1o7i7FHodtZwW3fmjbXCW34IJCsDEV5cZC4.png'
+        }
     },
     {
-        "id": 57000027,
-        "name": "Barbados",
-        "isCountry": true,
-        "countryCode": "BB"
+        'name': 'Mega Minion',
+        'id': 26000039,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/-T_e4YLbuhPBKbYnBwQfXgynNpp5eOIN_0RracYwL9c.png'
+        }
     },
     {
-        "id": 57000028,
-        "name": "Belarus",
-        "isCountry": true,
-        "countryCode": "BY"
+        'name': 'Dart Goblin',
+        'id': 26000040,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/BmpK3bqEAviflqHCdxxnfm-_l3pRPJw3qxHkwS55nCY.png'
+        }
     },
     {
-        "id": 57000029,
-        "name": "Belgium",
-        "isCountry": true,
-        "countryCode": "BE"
+        'name': 'Goblin Gang',
+        'id': 26000041,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/NHflxzVAQT4oAz7eDfdueqpictb5vrWezn1nuqFhE4w.png'
+        }
     },
     {
-        "id": 57000030,
-        "name": "Belize",
-        "isCountry": true,
-        "countryCode": "BZ"
+        'name': 'Electro Wizard',
+        'id': 26000042,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/RsFaHgB3w6vXsTjXdPr3x8l_GbV9TbOUCvIx07prbrQ.png'
+        }
     },
     {
-        "id": 57000031,
-        "name": "Benin",
-        "isCountry": true,
-        "countryCode": "BJ"
+        'name': 'Elite Barbarians',
+        'id': 26000043,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/C88C5JH_F3lLZj6K-tLcMo5DPjrFmvzIb1R2M6xCfTE.png'
+        }
     },
     {
-        "id": 57000032,
-        "name": "Bermuda",
-        "isCountry": true,
-        "countryCode": "BM"
+        'name': 'Hunter',
+        'id': 26000044,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/VNabB1WKnYtYRSG7X_FZfnZjQDHTBs9A96OGMFmecrA.png'
+        }
     },
     {
-        "id": 57000033,
-        "name": "Bhutan",
-        "isCountry": true,
-        "countryCode": "BT"
+        'name': 'Executioner',
+        'id': 26000045,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/9XL5BP2mqzV8kza6KF8rOxrpCZTyuGLp2l413DTjEoM.png'
+        }
     },
     {
-        "id": 57000034,
-        "name": "Bolivia",
-        "isCountry": true,
-        "countryCode": "BO"
+        'name': 'Bandit',
+        'id': 26000046,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/QWDdXMKJNpv0go-HYaWQWP6p8uIOHjqn-zX7G0p3DyM.png'
+        }
     },
     {
-        "id": 57000035,
-        "name": "Bosnia and Herzegovina",
-        "isCountry": true,
-        "countryCode": "BA"
+        'name': 'Royal Recruits',
+        'id': 26000047,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/jcNyYGUiXXNz3kuz8NBkHNKNREQKraXlb_Ts7rhCIdM.png'
+        }
     },
     {
-        "id": 57000036,
-        "name": "Botswana",
-        "isCountry": true,
-        "countryCode": "BW"
+        'name': 'Night Witch',
+        'id': 26000048,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/NpCrXDEDBBJgNv9QrBAcJmmMFbS7pe3KCY8xJ5VB18A.png'
+        }
     },
     {
-        "id": 57000037,
-        "name": "Bouvet Island",
-        "isCountry": true,
-        "countryCode": "BV"
+        'name': 'Bats',
+        'id': 26000049,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/EnIcvO21hxiNpoI-zO6MDjLmzwPbq8Z4JPo2OKoVUjU.png'
+        }
     },
     {
-        "id": 57000038,
-        "name": "Brazil",
-        "isCountry": true,
-        "countryCode": "BR"
+        'name': 'Royal Ghost',
+        'id': 26000050,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/3En2cz0ISQAaMTHY3hj3rTveFN2kJYq-H4VxvdJNvCM.png'
+        }
     },
     {
-        "id": 57000039,
-        "name": "British Indian Ocean Territory",
-        "isCountry": true,
-        "countryCode": "IO"
+        'name': 'Ram Rider',
+        'id': 26000051,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/QaJyerT7f7oMyZ3Fv1glKymtLSvx7YUXisAulxl7zRI.png'
+        }
     },
     {
-        "id": 57000040,
-        "name": "British Virgin Islands",
-        "isCountry": true,
-        "countryCode": "VG"
+        'name': 'Zappies',
+        'id': 26000052,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/QZfHRpLRmutZbCr5fpLnTpIp89vLI6NrAwzGZ8tHEc4.png'
+        }
     },
     {
-        "id": 57000041,
-        "name": "Brunei",
-        "isCountry": true,
-        "countryCode": "BN"
+        'name': 'Rascals',
+        'id': 26000053,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/KV48DfwVHKx9XCjzBdk3daT_Eb52Me4VgjVO7WctRc4.png'
+        }
     },
     {
-        "id": 57000042,
-        "name": "Bulgaria",
-        "isCountry": true,
-        "countryCode": "BG"
+        'name': 'Cannon Cart',
+        'id': 26000054,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/aqwxRz8HXzqlMCO4WMXNA1txynjXTsLinknqsgZLbok.png'
+        }
     },
     {
-        "id": 57000043,
-        "name": "Burkina Faso",
-        "isCountry": true,
-        "countryCode": "BF"
+        'name': 'Mega Knight',
+        'id': 26000055,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/O2NycChSNhn_UK9nqBXUhhC_lILkiANzPuJjtjoz0CE.png'
+        }
     },
     {
-        "id": 57000044,
-        "name": "Burundi",
-        "isCountry": true,
-        "countryCode": "BI"
+        'name': 'Skeleton Barrel',
+        'id': 26000056,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/vCB4DWCcrGbTkarjcOiVz4aNDx6GWLm0yUepg9E1MGo.png'
+        }
     },
     {
-        "id": 57000045,
-        "name": "Cambodia",
-        "isCountry": true,
-        "countryCode": "KH"
+        'name': 'Flying Machine',
+        'id': 26000057,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/hzKNE3QwFcrSrDDRuVW3QY_OnrDPijSiIp-PsWgFevE.png'
+        }
     },
     {
-        "id": 57000046,
-        "name": "Cameroon",
-        "isCountry": true,
-        "countryCode": "CM"
+        'name': 'Wall Breakers',
+        'id': 26000058,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/_xPphEfC8eEwFNrfU3cMQG9-f5JaLQ31ARCA7l3XtW4.png'
+        }
     },
     {
-        "id": 57000047,
-        "name": "Canada",
-        "isCountry": true,
-        "countryCode": "CA"
+        'name': 'Royal Hogs',
+        'id': 26000059,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/ASSQJG_MoVq9e81HZzo4bynMnyLNpNJMfSLb3hqydOw.png'
+        }
     },
     {
-        "id": 57000048,
-        "name": "Canary Islands",
-        "isCountry": true,
-        "countryCode": "IC"
+        'name': 'Goblin Giant',
+        'id': 26000060,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/SoW16cY3jXBwaTDvb39DkqiVsoFVaDWbzf5QBYphJrY.png'
+        }
     },
     {
-        "id": 57000049,
-        "name": "Cape Verde",
-        "isCountry": true,
-        "countryCode": "CV"
+        'name': 'Fisherman',
+        'id': 26000061,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/U2KZ3g0wyufcuA5P2Xrn3Z3lr1WiJmc5S0IWOZHgizQ.png'
+        }
     },
     {
-        "id": 57000050,
-        "name": "Caribbean Netherlands",
-        "isCountry": true,
-        "countryCode": "BQ"
+        'name': 'Magic Archer',
+        'id': 26000062,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Avli3W7BxU9HQ2SoLiXnBgGx25FoNXUSFm7OcAk68ek.png'
+        }
     },
     {
-        "id": 57000051,
-        "name": "Cayman Islands",
-        "isCountry": true,
-        "countryCode": "KY"
+        'name': 'Electro Dragon',
+        'id': 26000063,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/tN9h6lnMNPCNsx0LMFmvpHgznbDZ1fBRkx-C7UfNmfY.png'
+        }
     },
     {
-        "id": 57000052,
-        "name": "Central African Republic",
-        "isCountry": true,
-        "countryCode": "CF"
+        'name': 'Firecracker',
+        'id': 26000064,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/c1rL3LO1U2D9-TkeFfAC18gP3AO8ztSwrcHMZplwL2Q.png'
+        }
     },
     {
-        "id": 57000053,
-        "name": "Ceuta and Melilla",
-        "isCountry": true,
-        "countryCode": "EA"
+        'name': 'Elixir Golem',
+        'id': 26000067,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/puhMsZjCIqy21HW3hYxjrk_xt8NIPyFqjRy-BeLKZwo.png'
+        }
     },
     {
-        "id": 57000054,
-        "name": "Chad",
-        "isCountry": true,
-        "countryCode": "TD"
+        'name': 'Battle Healer',
+        'id': 26000068,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/KdwXcoigS2Kg-cgA7BJJIANbUJG6SNgjetRQ-MegZ08.png'
+        }
     },
     {
-        "id": 57000055,
-        "name": "Chile",
-        "isCountry": true,
-        "countryCode": "CL"
+        'name': 'Skeleton Dragons',
+        'id': 26000080,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/qPOtg9uONh47_NLxGhhFc_ww9PlZ6z3Ry507q1NZUXs.png'
+        }
     },
     {
-        "id": 57000056,
-        "name": "China",
-        "isCountry": true,
-        "countryCode": "CN"
+        'name': 'Cannon',
+        'id': 27000000,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/nZK1y-beLxO5vnlyUhK6-2zH2NzXJwqykcosqQ1cmZ8.png'
+        }
     },
     {
-        "id": 57000057,
-        "name": "Christmas Island",
-        "isCountry": true,
-        "countryCode": "CX"
+        'name': 'Goblin Hut',
+        'id': 27000001,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/l8ZdzzNLcwB4u7ihGgxNFQOjCT_njFuAhZr7D6PRF7E.png'
+        }
     },
     {
-        "id": 57000058,
-        "name": "Cocos (Keeling) Islands",
-        "isCountry": true,
-        "countryCode": "CC"
+        'name': 'Mortar',
+        'id': 27000002,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/lPOSw6H7YOHq2miSCrf7ZDL3ANjhJdPPDYOTujdNrVE.png'
+        }
     },
     {
-        "id": 57000059,
-        "name": "Colombia",
-        "isCountry": true,
-        "countryCode": "CO"
+        'name': 'Inferno Tower',
+        'id': 27000003,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/GSHY_wrooMMLET6bG_WJB8redtwx66c4i80ipi4gYOM.png'
+        }
     },
     {
-        "id": 57000060,
-        "name": "Comoros",
-        "isCountry": true,
-        "countryCode": "KM"
+        'name': 'Bomb Tower',
+        'id': 27000004,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/rirYRyHPc97emRjoH-c1O8uZCBzPVnToaGuNGusF3TQ.png'
+        }
     },
     {
-        "id": 57000061,
-        "name": "Congo (DRC)",
-        "isCountry": true,
-        "countryCode": "CG"
+        'name': 'Barbarian Hut',
+        'id': 27000005,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/ho0nOG2y3Ch86elHHcocQs8Fv_QNe0cFJ2CijsxABZA.png'
+        }
     },
     {
-        "id": 57000062,
-        "name": "Congo (Republic)",
-        "isCountry": true,
-        "countryCode": "CD"
+        'name': 'Tesla',
+        'id': 27000006,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/OiwnGrxFMNiHetYEerE-UZt0L_uYNzFY7qV_CA_OxR4.png'
+        }
     },
     {
-        "id": 57000063,
-        "name": "Cook Islands",
-        "isCountry": true,
-        "countryCode": "CK"
+        'name': 'Elixir Collector',
+        'id': 27000007,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/BGLo3Grsp81c72EpxLLk-Sofk3VY56zahnUNOv3JcT0.png'
+        }
     },
     {
-        "id": 57000064,
-        "name": "Costa Rica",
-        "isCountry": true,
-        "countryCode": "CR"
+        'name': 'X-Bow',
+        'id': 27000008,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/zVQ9Hme1hlj9Dc6e1ORl9xWwglcSrP7ejow5mAhLUJc.png'
+        }
     },
     {
-        "id": 57000065,
-        "name": "Côte d’Ivoire",
-        "isCountry": true,
-        "countryCode": "CI"
+        'name': 'Tombstone',
+        'id': 27000009,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/LjSfSbwQfkZuRJY4pVxKspZ-a0iM5KAhU8w-a_N5Z7Y.png'
+        }
     },
     {
-        "id": 57000066,
-        "name": "Croatia",
-        "isCountry": true,
-        "countryCode": "HR"
+        'name': 'Furnace',
+        'id': 27000010,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/iqbDiG7yYRIzvCPXdt9zPb3IvMt7F7Gi4wIPnh2x4aI.png'
+        }
     },
     {
-        "id": 57000067,
-        "name": "Cuba",
-        "isCountry": true,
-        "countryCode": "CU"
+        'name': 'Goblin Cage',
+        'id': 27000012,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/vD24bBgK4rSq7wx5QEbuqChtPMRFviL_ep76GwQw1yA.png'
+        }
     },
     {
-        "id": 57000068,
-        "name": "Curaçao",
-        "isCountry": true,
-        "countryCode": "CW"
+        'name': 'Fireball',
+        'id': 28000000,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/lZD9MILQv7O-P3XBr_xOLS5idwuz3_7Ws9G60U36yhc.png'
+        }
     },
     {
-        "id": 57000069,
-        "name": "Cyprus",
-        "isCountry": true,
-        "countryCode": "CY"
+        'name': 'Arrows',
+        'id': 28000001,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Flsoci-Y6y8ZFVi5uRFTmgkPnCmMyMVrU7YmmuPvSBo.png'
+        }
     },
     {
-        "id": 57000070,
-        "name": "Czech Republic",
-        "isCountry": true,
-        "countryCode": "CZ"
+        'name': 'Rage',
+        'id': 28000002,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/bGP21OOmcpHMJ5ZA79bHVV2D-NzPtDkvBskCNJb7pg0.png'
+        }
     },
     {
-        "id": 57000071,
-        "name": "Denmark",
-        "isCountry": true,
-        "countryCode": "DK"
+        'name': 'Rocket',
+        'id': 28000003,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Ie07nQNK9CjhKOa4-arFAewi4EroqaA-86Xo7r5tx94.png'
+        }
     },
     {
-        "id": 57000072,
-        "name": "Diego Garcia",
-        "isCountry": true,
-        "countryCode": "DG"
+        'name': 'Goblin Barrel',
+        'id': 28000004,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/CoZdp5PpsTH858l212lAMeJxVJ0zxv9V-f5xC8Bvj5g.png'
+        }
     },
     {
-        "id": 57000073,
-        "name": "Djibouti",
-        "isCountry": true,
-        "countryCode": "DJ"
+        'name': 'Freeze',
+        'id': 28000005,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/I1M20_Zs_p_BS1NaNIVQjuMJkYI_1-ePtwYZahn0JXQ.png'
+        }
     },
     {
-        "id": 57000074,
-        "name": "Dominica",
-        "isCountry": true,
-        "countryCode": "DM"
-    },
-    {
-        "id": 57000075,
-        "name": "Dominican Republic",
-        "isCountry": true,
-        "countryCode": "DO"
-    },
-    {
-        "id": 57000076,
-        "name": "Ecuador",
-        "isCountry": true,
-        "countryCode": "EC"
-    },
-    {
-        "id": 57000077,
-        "name": "Egypt",
-        "isCountry": true,
-        "countryCode": "EG"
-    },
-    {
-        "id": 57000078,
-        "name": "El Salvador",
-        "isCountry": true,
-        "countryCode": "SV"
-    },
-    {
-        "id": 57000079,
-        "name": "Equatorial Guinea",
-        "isCountry": true,
-        "countryCode": "GQ"
-    },
-    {
-        "id": 57000080,
-        "name": "Eritrea",
-        "isCountry": true,
-        "countryCode": "ER"
-    },
-    {
-        "id": 57000081,
-        "name": "Estonia",
-        "isCountry": true,
-        "countryCode": "EE"
-    },
-    {
-        "id": 57000082,
-        "name": "Ethiopia",
-        "isCountry": true,
-        "countryCode": "ET"
-    },
-    {
-        "id": 57000083,
-        "name": "Falkland Islands",
-        "isCountry": true,
-        "countryCode": "FK"
-    },
-    {
-        "id": 57000084,
-        "name": "Faroe Islands",
-        "isCountry": true,
-        "countryCode": "FO"
-    },
-    {
-        "id": 57000085,
-        "name": "Fiji",
-        "isCountry": true,
-        "countryCode": "FJ"
-    },
-    {
-        "id": 57000086,
-        "name": "Finland",
-        "isCountry": true,
-        "countryCode": "FI"
-    },
-    {
-        "id": 57000087,
-        "name": "France",
-        "isCountry": true,
-        "countryCode": "FR"
-    },
-    {
-        "id": 57000088,
-        "name": "French Guiana",
-        "isCountry": true,
-        "countryCode": "GF"
-    },
-    {
-        "id": 57000089,
-        "name": "French Polynesia",
-        "isCountry": true,
-        "countryCode": "PF"
-    },
-    {
-        "id": 57000090,
-        "name": "French Southern Territories",
-        "isCountry": true,
-        "countryCode": "TF"
-    },
-    {
-        "id": 57000091,
-        "name": "Gabon",
-        "isCountry": true,
-        "countryCode": "GA"
-    },
-    {
-        "id": 57000092,
-        "name": "Gambia",
-        "isCountry": true,
-        "countryCode": "GM"
-    },
-    {
-        "id": 57000093,
-        "name": "Georgia",
-        "isCountry": true,
-        "countryCode": "GE"
-    },
-    {
-        "id": 57000094,
-        "name": "Germany",
-        "isCountry": true,
-        "countryCode": "DE"
-    },
-    {
-        "id": 57000095,
-        "name": "Ghana",
-        "isCountry": true,
-        "countryCode": "GH"
-    },
-    {
-        "id": 57000096,
-        "name": "Gibraltar",
-        "isCountry": true,
-        "countryCode": "GI"
-    },
-    {
-        "id": 57000097,
-        "name": "Greece",
-        "isCountry": true,
-        "countryCode": "GR"
-    },
-    {
-        "id": 57000098,
-        "name": "Greenland",
-        "isCountry": true,
-        "countryCode": "GL"
-    },
-    {
-        "id": 57000099,
-        "name": "Grenada",
-        "isCountry": true,
-        "countryCode": "GD"
-    },
-    {
-        "id": 57000100,
-        "name": "Guadeloupe",
-        "isCountry": true,
-        "countryCode": "GP"
-    },
-    {
-        "id": 57000101,
-        "name": "Guam",
-        "isCountry": true,
-        "countryCode": "GU"
-    },
-    {
-        "id": 57000102,
-        "name": "Guatemala",
-        "isCountry": true,
-        "countryCode": "GT"
-    },
-    {
-        "id": 57000103,
-        "name": "Guernsey",
-        "isCountry": true,
-        "countryCode": "GG"
-    },
-    {
-        "id": 57000104,
-        "name": "Guinea",
-        "isCountry": true,
-        "countryCode": "GN"
-    },
-    {
-        "id": 57000105,
-        "name": "Guinea-Bissau",
-        "isCountry": true,
-        "countryCode": "GW"
-    },
-    {
-        "id": 57000106,
-        "name": "Guyana",
-        "isCountry": true,
-        "countryCode": "GY"
-    },
-    {
-        "id": 57000107,
-        "name": "Haiti",
-        "isCountry": true,
-        "countryCode": "HT"
-    },
-    {
-        "id": 57000108,
-        "name": "Heard & McDonald Islands",
-        "isCountry": true,
-        "countryCode": "HM"
-    },
-    {
-        "id": 57000109,
-        "name": "Honduras",
-        "isCountry": true,
-        "countryCode": "HN"
-    },
-    {
-        "id": 57000110,
-        "name": "Hong Kong",
-        "isCountry": true,
-        "countryCode": "HK"
-    },
-    {
-        "id": 57000111,
-        "name": "Hungary",
-        "isCountry": true,
-        "countryCode": "HU"
-    },
-    {
-        "id": 57000112,
-        "name": "Iceland",
-        "isCountry": true,
-        "countryCode": "IS"
-    },
-    {
-        "id": 57000113,
-        "name": "India",
-        "isCountry": true,
-        "countryCode": "IN"
-    },
-    {
-        "id": 57000114,
-        "name": "Indonesia",
-        "isCountry": true,
-        "countryCode": "ID"
-    },
-    {
-        "id": 57000115,
-        "name": "Iran",
-        "isCountry": true,
-        "countryCode": "IR"
-    },
-    {
-        "id": 57000116,
-        "name": "Iraq",
-        "isCountry": true,
-        "countryCode": "IQ"
-    },
-    {
-        "id": 57000117,
-        "name": "Ireland",
-        "isCountry": true,
-        "countryCode": "IE"
-    },
-    {
-        "id": 57000118,
-        "name": "Isle of Man",
-        "isCountry": true,
-        "countryCode": "IM"
-    },
-    {
-        "id": 57000119,
-        "name": "Israel",
-        "isCountry": true,
-        "countryCode": "IL"
-    },
-    {
-        "id": 57000120,
-        "name": "Italy",
-        "isCountry": true,
-        "countryCode": "IT"
-    },
-    {
-        "id": 57000121,
-        "name": "Jamaica",
-        "isCountry": true,
-        "countryCode": "JM"
-    },
-    {
-        "id": 57000122,
-        "name": "Japan",
-        "isCountry": true,
-        "countryCode": "JP"
-    },
-    {
-        "id": 57000123,
-        "name": "Jersey",
-        "isCountry": true,
-        "countryCode": "JE"
-    },
-    {
-        "id": 57000124,
-        "name": "Jordan",
-        "isCountry": true,
-        "countryCode": "JO"
-    },
-    {
-        "id": 57000125,
-        "name": "Kazakhstan",
-        "isCountry": true,
-        "countryCode": "KZ"
-    },
-    {
-        "id": 57000126,
-        "name": "Kenya",
-        "isCountry": true,
-        "countryCode": "KE"
-    },
-    {
-        "id": 57000127,
-        "name": "Kiribati",
-        "isCountry": true,
-        "countryCode": "KI"
-    },
-    {
-        "id": 57000128,
-        "name": "Kosovo",
-        "isCountry": true,
-        "countryCode": "XK"
-    },
-    {
-        "id": 57000129,
-        "name": "Kuwait",
-        "isCountry": true,
-        "countryCode": "KW"
-    },
-    {
-        "id": 57000130,
-        "name": "Kyrgyzstan",
-        "isCountry": true,
-        "countryCode": "KG"
-    },
-    {
-        "id": 57000131,
-        "name": "Laos",
-        "isCountry": true,
-        "countryCode": "LA"
-    },
-    {
-        "id": 57000132,
-        "name": "Latvia",
-        "isCountry": true,
-        "countryCode": "LV"
-    },
-    {
-        "id": 57000133,
-        "name": "Lebanon",
-        "isCountry": true,
-        "countryCode": "LB"
-    },
-    {
-        "id": 57000134,
-        "name": "Lesotho",
-        "isCountry": true,
-        "countryCode": "LS"
-    },
-    {
-        "id": 57000135,
-        "name": "Liberia",
-        "isCountry": true,
-        "countryCode": "LR"
-    },
-    {
-        "id": 57000136,
-        "name": "Libya",
-        "isCountry": true,
-        "countryCode": "LY"
-    },
-    {
-        "id": 57000137,
-        "name": "Liechtenstein",
-        "isCountry": true,
-        "countryCode": "LI"
-    },
-    {
-        "id": 57000138,
-        "name": "Lithuania",
-        "isCountry": true,
-        "countryCode": "LT"
-    },
-    {
-        "id": 57000139,
-        "name": "Luxembourg",
-        "isCountry": true,
-        "countryCode": "LU"
-    },
-    {
-        "id": 57000140,
-        "name": "Macau",
-        "isCountry": true,
-        "countryCode": "MO"
-    },
-    {
-        "id": 57000141,
-        "name": "Macedonia (FYROM)",
-        "isCountry": true,
-        "countryCode": "MK"
-    },
-    {
-        "id": 57000142,
-        "name": "Madagascar",
-        "isCountry": true,
-        "countryCode": "MG"
-    },
-    {
-        "id": 57000143,
-        "name": "Malawi",
-        "isCountry": true,
-        "countryCode": "MW"
-    },
-    {
-        "id": 57000144,
-        "name": "Malaysia",
-        "isCountry": true,
-        "countryCode": "MY"
-    },
-    {
-        "id": 57000145,
-        "name": "Maldives",
-        "isCountry": true,
-        "countryCode": "MV"
-    },
-    {
-        "id": 57000146,
-        "name": "Mali",
-        "isCountry": true,
-        "countryCode": "ML"
-    },
-    {
-        "id": 57000147,
-        "name": "Malta",
-        "isCountry": true,
-        "countryCode": "MT"
-    },
-    {
-        "id": 57000148,
-        "name": "Marshall Islands",
-        "isCountry": true,
-        "countryCode": "MH"
-    },
-    {
-        "id": 57000149,
-        "name": "Martinique",
-        "isCountry": true,
-        "countryCode": "MQ"
-    },
-    {
-        "id": 57000150,
-        "name": "Mauritania",
-        "isCountry": true,
-        "countryCode": "MR"
-    },
-    {
-        "id": 57000151,
-        "name": "Mauritius",
-        "isCountry": true,
-        "countryCode": "MU"
-    },
-    {
-        "id": 57000152,
-        "name": "Mayotte",
-        "isCountry": true,
-        "countryCode": "YT"
-    },
-    {
-        "id": 57000153,
-        "name": "Mexico",
-        "isCountry": true,
-        "countryCode": "MX"
-    },
-    {
-        "id": 57000154,
-        "name": "Micronesia",
-        "isCountry": true,
-        "countryCode": "FM"
-    },
-    {
-        "id": 57000155,
-        "name": "Moldova",
-        "isCountry": true,
-        "countryCode": "MD"
-    },
-    {
-        "id": 57000156,
-        "name": "Monaco",
-        "isCountry": true,
-        "countryCode": "MC"
-    },
-    {
-        "id": 57000157,
-        "name": "Mongolia",
-        "isCountry": true,
-        "countryCode": "MN"
-    },
-    {
-        "id": 57000158,
-        "name": "Montenegro",
-        "isCountry": true,
-        "countryCode": "ME"
-    },
-    {
-        "id": 57000159,
-        "name": "Montserrat",
-        "isCountry": true,
-        "countryCode": "MS"
-    },
-    {
-        "id": 57000160,
-        "name": "Morocco",
-        "isCountry": true,
-        "countryCode": "MA"
-    },
-    {
-        "id": 57000161,
-        "name": "Mozambique",
-        "isCountry": true,
-        "countryCode": "MZ"
-    },
-    {
-        "id": 57000162,
-        "name": "Myanmar (Burma)",
-        "isCountry": true,
-        "countryCode": "MM"
-    },
-    {
-        "id": 57000163,
-        "name": "Namibia",
-        "isCountry": true,
-        "countryCode": "NA"
-    },
-    {
-        "id": 57000164,
-        "name": "Nauru",
-        "isCountry": true,
-        "countryCode": "NR"
-    },
-    {
-        "id": 57000165,
-        "name": "Nepal",
-        "isCountry": true,
-        "countryCode": "NP"
-    },
-    {
-        "id": 57000166,
-        "name": "Netherlands",
-        "isCountry": true,
-        "countryCode": "NL"
-    },
-    {
-        "id": 57000167,
-        "name": "New Caledonia",
-        "isCountry": true,
-        "countryCode": "NC"
-    },
-    {
-        "id": 57000168,
-        "name": "New Zealand",
-        "isCountry": true,
-        "countryCode": "NZ"
-    },
-    {
-        "id": 57000169,
-        "name": "Nicaragua",
-        "isCountry": true,
-        "countryCode": "NI"
-    },
-    {
-        "id": 57000170,
-        "name": "Niger",
-        "isCountry": true,
-        "countryCode": "NE"
-    },
-    {
-        "id": 57000171,
-        "name": "Nigeria",
-        "isCountry": true,
-        "countryCode": "NG"
-    },
-    {
-        "id": 57000172,
-        "name": "Niue",
-        "isCountry": true,
-        "countryCode": "NU"
-    },
-    {
-        "id": 57000173,
-        "name": "Norfolk Island",
-        "isCountry": true,
-        "countryCode": "NF"
-    },
-    {
-        "id": 57000174,
-        "name": "North Korea",
-        "isCountry": true,
-        "countryCode": "KP"
-    },
-    {
-        "id": 57000175,
-        "name": "Northern Mariana Islands",
-        "isCountry": true,
-        "countryCode": "MP"
-    },
-    {
-        "id": 57000176,
-        "name": "Norway",
-        "isCountry": true,
-        "countryCode": "NO"
-    },
-    {
-        "id": 57000177,
-        "name": "Oman",
-        "isCountry": true,
-        "countryCode": "OM"
-    },
-    {
-        "id": 57000178,
-        "name": "Pakistan",
-        "isCountry": true,
-        "countryCode": "PK"
-    },
-    {
-        "id": 57000179,
-        "name": "Palau",
-        "isCountry": true,
-        "countryCode": "PW"
-    },
-    {
-        "id": 57000180,
-        "name": "Palestine",
-        "isCountry": true,
-        "countryCode": "PS"
-    },
-    {
-        "id": 57000181,
-        "name": "Panama",
-        "isCountry": true,
-        "countryCode": "PA"
-    },
-    {
-        "id": 57000182,
-        "name": "Papua New Guinea",
-        "isCountry": true,
-        "countryCode": "PG"
-    },
-    {
-        "id": 57000183,
-        "name": "Paraguay",
-        "isCountry": true,
-        "countryCode": "PY"
-    },
-    {
-        "id": 57000184,
-        "name": "Peru",
-        "isCountry": true,
-        "countryCode": "PE"
-    },
-    {
-        "id": 57000185,
-        "name": "Philippines",
-        "isCountry": true,
-        "countryCode": "PH"
-    },
-    {
-        "id": 57000186,
-        "name": "Pitcairn Islands",
-        "isCountry": true,
-        "countryCode": "PN"
-    },
-    {
-        "id": 57000187,
-        "name": "Poland",
-        "isCountry": true,
-        "countryCode": "PL"
-    },
-    {
-        "id": 57000188,
-        "name": "Portugal",
-        "isCountry": true,
-        "countryCode": "PT"
-    },
-    {
-        "id": 57000189,
-        "name": "Puerto Rico",
-        "isCountry": true,
-        "countryCode": "PR"
-    },
-    {
-        "id": 57000190,
-        "name": "Qatar",
-        "isCountry": true,
-        "countryCode": "QA"
-    },
-    {
-        "id": 57000191,
-        "name": "Réunion",
-        "isCountry": true,
-        "countryCode": "RE"
-    },
-    {
-        "id": 57000192,
-        "name": "Romania",
-        "isCountry": true,
-        "countryCode": "RO"
-    },
-    {
-        "id": 57000193,
-        "name": "Russia",
-        "isCountry": true,
-        "countryCode": "RU"
-    },
-    {
-        "id": 57000194,
-        "name": "Rwanda",
-        "isCountry": true,
-        "countryCode": "RW"
-    },
-    {
-        "id": 57000195,
-        "name": "Saint Barthélemy",
-        "isCountry": true,
-        "countryCode": "BL"
-    },
-    {
-        "id": 57000196,
-        "name": "Saint Helena",
-        "isCountry": true,
-        "countryCode": "SH"
-    },
-    {
-        "id": 57000197,
-        "name": "Saint Kitts and Nevis",
-        "isCountry": true,
-        "countryCode": "KN"
-    },
-    {
-        "id": 57000198,
-        "name": "Saint Lucia",
-        "isCountry": true,
-        "countryCode": "LC"
-    },
-    {
-        "id": 57000199,
-        "name": "Saint Martin",
-        "isCountry": true,
-        "countryCode": "MF"
-    },
-    {
-        "id": 57000200,
-        "name": "Saint Pierre and Miquelon",
-        "isCountry": true,
-        "countryCode": "PM"
-    },
-    {
-        "id": 57000201,
-        "name": "Samoa",
-        "isCountry": true,
-        "countryCode": "WS"
-    },
-    {
-        "id": 57000202,
-        "name": "San Marino",
-        "isCountry": true,
-        "countryCode": "SM"
-    },
-    {
-        "id": 57000203,
-        "name": "São Tomé and Príncipe",
-        "isCountry": true,
-        "countryCode": "ST"
-    },
-    {
-        "id": 57000204,
-        "name": "Saudi Arabia",
-        "isCountry": true,
-        "countryCode": "SA"
-    },
-    {
-        "id": 57000205,
-        "name": "Senegal",
-        "isCountry": true,
-        "countryCode": "SN"
-    },
-    {
-        "id": 57000206,
-        "name": "Serbia",
-        "isCountry": true,
-        "countryCode": "RS"
-    },
-    {
-        "id": 57000207,
-        "name": "Seychelles",
-        "isCountry": true,
-        "countryCode": "SC"
-    },
-    {
-        "id": 57000208,
-        "name": "Sierra Leone",
-        "isCountry": true,
-        "countryCode": "SL"
-    },
-    {
-        "id": 57000209,
-        "name": "Singapore",
-        "isCountry": true,
-        "countryCode": "SG"
-    },
-    {
-        "id": 57000210,
-        "name": "Sint Maarten",
-        "isCountry": true,
-        "countryCode": "SX"
-    },
-    {
-        "id": 57000211,
-        "name": "Slovakia",
-        "isCountry": true,
-        "countryCode": "SK"
-    },
-    {
-        "id": 57000212,
-        "name": "Slovenia",
-        "isCountry": true,
-        "countryCode": "SI"
-    },
-    {
-        "id": 57000213,
-        "name": "Solomon Islands",
-        "isCountry": true,
-        "countryCode": "SB"
-    },
-    {
-        "id": 57000214,
-        "name": "Somalia",
-        "isCountry": true,
-        "countryCode": "SO"
-    },
-    {
-        "id": 57000215,
-        "name": "South Africa",
-        "isCountry": true,
-        "countryCode": "ZA"
-    },
-    {
-        "id": 57000216,
-        "name": "South Korea",
-        "isCountry": true,
-        "countryCode": "KR"
-    },
-    {
-        "id": 57000217,
-        "name": "South Sudan",
-        "isCountry": true,
-        "countryCode": "SS"
-    },
-    {
-        "id": 57000218,
-        "name": "Spain",
-        "isCountry": true,
-        "countryCode": "ES"
-    },
-    {
-        "id": 57000219,
-        "name": "Sri Lanka",
-        "isCountry": true,
-        "countryCode": "LK"
-    },
-    {
-        "id": 57000220,
-        "name": "St. Vincent & Grenadines",
-        "isCountry": true,
-        "countryCode": "VC"
-    },
-    {
-        "id": 57000221,
-        "name": "Sudan",
-        "isCountry": true,
-        "countryCode": "SD"
-    },
-    {
-        "id": 57000222,
-        "name": "Suriname",
-        "isCountry": true,
-        "countryCode": "SR"
-    },
-    {
-        "id": 57000223,
-        "name": "Svalbard and Jan Mayen",
-        "isCountry": true,
-        "countryCode": "SJ"
-    },
-    {
-        "id": 57000224,
-        "name": "Swaziland",
-        "isCountry": true,
-        "countryCode": "SZ"
-    },
-    {
-        "id": 57000225,
-        "name": "Sweden",
-        "isCountry": true,
-        "countryCode": "SE"
-    },
-    {
-        "id": 57000226,
-        "name": "Switzerland",
-        "isCountry": true,
-        "countryCode": "CH"
-    },
-    {
-        "id": 57000227,
-        "name": "Syria",
-        "isCountry": true,
-        "countryCode": "SY"
-    },
-    {
-        "id": 57000228,
-        "name": "Taiwan",
-        "isCountry": true,
-        "countryCode": "TW"
-    },
-    {
-        "id": 57000229,
-        "name": "Tajikistan",
-        "isCountry": true,
-        "countryCode": "TJ"
-    },
-    {
-        "id": 57000230,
-        "name": "Tanzania",
-        "isCountry": true,
-        "countryCode": "TZ"
-    },
-    {
-        "id": 57000231,
-        "name": "Thailand",
-        "isCountry": true,
-        "countryCode": "TH"
-    },
-    {
-        "id": 57000232,
-        "name": "Timor-Leste",
-        "isCountry": true,
-        "countryCode": "TL"
-    },
-    {
-        "id": 57000233,
-        "name": "Togo",
-        "isCountry": true,
-        "countryCode": "TG"
-    },
-    {
-        "id": 57000234,
-        "name": "Tokelau",
-        "isCountry": true,
-        "countryCode": "TK"
-    },
-    {
-        "id": 57000235,
-        "name": "Tonga",
-        "isCountry": true,
-        "countryCode": "TO"
-    },
-    {
-        "id": 57000236,
-        "name": "Trinidad and Tobago",
-        "isCountry": true,
-        "countryCode": "TT"
-    },
-    {
-        "id": 57000237,
-        "name": "Tristan da Cunha",
-        "isCountry": true,
-        "countryCode": "TA"
-    },
-    {
-        "id": 57000238,
-        "name": "Tunisia",
-        "isCountry": true,
-        "countryCode": "TN"
-    },
-    {
-        "id": 57000239,
-        "name": "Turkey",
-        "isCountry": true,
-        "countryCode": "TR"
-    },
-    {
-        "id": 57000240,
-        "name": "Turkmenistan",
-        "isCountry": true,
-        "countryCode": "TM"
-    },
-    {
-        "id": 57000241,
-        "name": "Turks and Caicos Islands",
-        "isCountry": true,
-        "countryCode": "TC"
-    },
-    {
-        "id": 57000242,
-        "name": "Tuvalu",
-        "isCountry": true,
-        "countryCode": "TV"
-    },
-    {
-        "id": 57000243,
-        "name": "U.S. Outlying Islands",
-        "isCountry": true,
-        "countryCode": "UM"
-    },
-    {
-        "id": 57000244,
-        "name": "U.S. Virgin Islands",
-        "isCountry": true,
-        "countryCode": "VI"
-    },
-    {
-        "id": 57000245,
-        "name": "Uganda",
-        "isCountry": true,
-        "countryCode": "UG"
-    },
-    {
-        "id": 57000246,
-        "name": "Ukraine",
-        "isCountry": true,
-        "countryCode": "UA"
-    },
-    {
-        "id": 57000247,
-        "name": "United Arab Emirates",
-        "isCountry": true,
-        "countryCode": "AE"
-    },
-    {
-        "id": 57000248,
-        "name": "United Kingdom",
-        "isCountry": true,
-        "countryCode": "GB"
-    },
-    {
-        "id": 57000249,
-        "name": "United States",
-        "isCountry": true,
-        "countryCode": "US"
-    },
-    {
-        "id": 57000250,
-        "name": "Uruguay",
-        "isCountry": true,
-        "countryCode": "UY"
-    },
-    {
-        "id": 57000251,
-        "name": "Uzbekistan",
-        "isCountry": true,
-        "countryCode": "UZ"
-    },
-    {
-        "id": 57000252,
-        "name": "Vanuatu",
-        "isCountry": true,
-        "countryCode": "VU"
-    },
-    {
-        "id": 57000253,
-        "name": "Vatican City",
-        "isCountry": true,
-        "countryCode": "VA"
-    },
-    {
-        "id": 57000254,
-        "name": "Venezuela",
-        "isCountry": true,
-        "countryCode": "VE"
-    },
-    {
-        "id": 57000255,
-        "name": "Vietnam",
-        "isCountry": true,
-        "countryCode": "VN"
-    },
-    {
-        "id": 57000256,
-        "name": "Wallis and Futuna",
-        "isCountry": true,
-        "countryCode": "WF"
-    },
-    {
-        "id": 57000257,
-        "name": "Western Sahara",
-        "isCountry": true,
-        "countryCode": "EH"
-    },
-    {
-        "id": 57000258,
-        "name": "Yemen",
-        "isCountry": true,
-        "countryCode": "YE"
-    },
-    {
-        "id": 57000259,
-        "name": "Zambia",
-        "isCountry": true,
-        "countryCode": "ZM"
-    },
-    {
-        "id": 57000260,
-        "name": "Zimbabwe",
-        "isCountry": true,
-        "countryCode": "ZW"
+        'name': 'Mirror',
+        'id': 28000006,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/wC6Cm9rKLEOk72zTsukVwxewKIoO4ZcMJun54zCPWvA.png'
+        }
+    },
+    {
+        'name': 'Lightning',
+        'id': 28000007,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/fpnESbYqe5GyZmaVVYe-SEu7tE0Kxh_HZyVigzvLjks.png'
+        }
+    },
+    {
+        'name': 'Zap',
+        'id': 28000008,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/7dxh2-yCBy1x44GrBaL29vjqnEEeJXHEAlsi5g6D1eY.png'
+        }
+    },
+    {
+        'name': 'Poison',
+        'id': 28000009,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/98HDkG2189yOULcVG9jz2QbJKtfuhH21DIrIjkOjxI8.png'
+        }
+    },
+    {
+        'name': 'Graveyard',
+        'id': 28000010,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Icp8BIyyfBTj1ncCJS7mb82SY7TPV-MAE-J2L2R48DI.png'
+        }
+    },
+    {
+        'name': 'The Log',
+        'id': 28000011,
+        'maxLevel': 5,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/_iDwuDLexHPFZ_x4_a0eP-rxCS6vwWgTs6DLauwwoaY.png'
+        }
+    },
+    {
+        'name': 'Tornado',
+        'id': 28000012,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/QJB-QK1QJHdw4hjpAwVSyZBozc2ZWAR9pQ-SMUyKaT0.png'
+        }
+    },
+    {
+        'name': 'Clone',
+        'id': 28000013,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/mHVCet-1TkwWq-pxVIU2ZWY9_2z7Z7wtP25ArEUsP_g.png'
+        }
+    },
+    {
+        'name': 'Earthquake',
+        'id': 28000014,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/XeQXcrUu59C52DslyZVwCnbi4yamID-WxfVZLShgZmE.png'
+        }
+    },
+    {
+        'name': 'Barbarian Barrel',
+        'id': 28000015,
+        'maxLevel': 8,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/Gb0G1yNy0i5cIGUHin8uoFWxqntNtRPhY_jeMXg7HnA.png'
+        }
+    },
+    {
+        'name': 'Heal Spirit',
+        'id': 28000016,
+        'maxLevel': 11,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/GITl06sa2nGRLPvboyXbGEv5E3I-wAwn1Eqa5esggbc.png'
+        }
+    },
+    {
+        'name': 'Giant Snowball',
+        'id': 28000017,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/7MaJLa6hK9WN2_VIshuh5DIDfGwm0wEv98gXtAxLDPs.png'
+        }
+    },
+    {
+        'name': 'Royal Delivery',
+        'id': 28000018,
+        'maxLevel': 13,
+        'iconUrls': {
+            'medium': 'https://api-assets.clashroyale.com/cards/300/LPg7AGjGI3_xmi7gLLgGC50yKM1jJ2teWkZfoHJcIZo.png'
+        }
     }
 ]
 
-Location.create(locations)
-    .then(allLocations => console.log(allLocations.length, ' location have been created'))
+Card.create(cards)
+    .then(allCards => console.log(allCards.length, 'cards have been created'))
     .catch(err => console.log(err))
 
 
