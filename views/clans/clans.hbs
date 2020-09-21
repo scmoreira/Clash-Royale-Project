@@ -1,0 +1,30 @@
+<div class="container justify-content-center">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="card-title"> Clans list</h1>
+        </div>
+    </div>    
+    
+    <div class="row">
+        {{#each datos}}
+        <div class="col-3"style="margin: 10px 0;">
+            <div class="card" style="width: 16rem; align-items: center;">
+                <h4 class="card-title" >{{name}}<hr></h4>
+                
+                <div class="card-body" >
+                    <p class="card-text icon"><img src="/images/trophy.png"><strong> War Trophies : </strong>{{clanWarTrophies}}</p>
+                    <p class="card-text icon"><img src="/images/trophy (1).png"><strong> Score : </strong>{{clanScore}}</p>
+                    <form action="/clans/details" method="post">
+                        <input type="hidden" name="tag" value={{tag}}>
+                        <input type="submit" value="Details">
+                    </form>
+                </div>
+
+            </div>
+         </div>
+        {{/each}}
+
+    </div>
+</div>
+
+
