@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 
 const Card = require('../models/card.model.js')
 
-mongoose.connect('mongodb://localhost/Clash-royal-project', {useUnifiedTopology: true, useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/Clash-royal-project', {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
 
 Card.collection.drop()
 

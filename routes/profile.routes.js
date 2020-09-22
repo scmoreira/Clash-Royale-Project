@@ -1,5 +1,5 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 const axios = require('axios')
 const qs = require('qs')
@@ -9,32 +9,28 @@ const User = require('../models/user.model')
 const Card = require('../models/card.model')
 const Location = require('../models/location.model')
 
-// router.get('/:id', (req, res, next) => {
+router.get("/:id", (req, res, next) => {
+  res.render("profile/user-profile");
+});
 
-//     const user = req.user
-//     conmouseleave.log(user)
-//     user.card.forEach(elm => console.log(elm))
+router.get("/edit/:id", (req, res, next) => {
 
-//     res.render('profile/user-profile')
-// })
+  const id = req.params.id;
 
-router.get('/edit/:id', (req, res, next) => {
+  User.findById(id)
+    .then((fullUser) => res.render("profile/user-edit-form", fullUser))
+    .catch((err) => next("Error :", err));
+});
 
-    const id = req.params.id
+router.post("/edit/:id", (req, res, next) => {
 
-    User.findById(id)
-        .then(fullUser => res.render('profile/user-edit-form', fullUser))
-        .catch(err => next('Error :', err))
-}) 
+  const id = req.params.id;
+  const { username, password } = req.body;
 
-router.post('/edit/:id', (req, res, next) => {
-    const id = req.params.id
-    const { username, password } = req.body
-
-    User.findByIdAndUpdate(id, { username, password })
-        .then(() => res.redirect('/profile'))
-        .catch(err => next('Error :', err))
-})
+  User.findByIdAndUpdate(id, { username, password })
+    .then(() => res.redirect("/profile"))
+    .catch((err) => next("Error :", err));
+});
 
 //Buscar ranking por País
 router.post('/', (req, res, next) => {
@@ -68,6 +64,7 @@ router.post('/', (req, res, next) => {
                 })       
                 .catch(err => res.render("profile/user-profile", { errorMsg: "Country not found!" }))
         })
+
         .then(() => {
             const config = {
                 method: 'get',
@@ -104,7 +101,6 @@ router.get('/delete/:id', (req, res, next) => {
     
 })
 
-
 router.post('/player', (req, res, next) => {
     
     let id = req.body.tag
@@ -131,6 +127,6 @@ router.post('/player', (req, res, next) => {
         .catch(err => next(err))
 })
 
-
 module.exports = router
+
 

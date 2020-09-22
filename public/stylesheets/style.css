@@ -5,9 +5,7 @@ h1, h2, h3 {
   font-weight: 200; }
 
 .navbar {
-  margin-bottom: 70px;
-  position: fixed;
-  width: 100%; }
+  margin-bottom: 70px; }
 
 #errorMsg {
   background-color: red;
@@ -85,8 +83,7 @@ h1, h2, h3 {
   align-items: center; }
 
 .ranking div {
-  padding: 0px;
-  color: #e2f8ff; }
+  padding: 0px; }
 
 .playerDeck {
   display: flex;
@@ -129,5 +126,8 @@ h1, h2, h3 {
   border: 5px groove #c4e8f3;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px; }
+
+canvas {
+  width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

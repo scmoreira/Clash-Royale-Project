@@ -31,3 +31,94 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <canvas id="radar"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="polarArea"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="/javascripts/chartStyles.js"></script>
+<script>
+    
+  
+    
+    var ctx = document.getElementById('polarArea').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: [ 'Challenge Max Wins', 'Tournament Cards Won', 'Tournament Battle Count'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [ {{ challengeMaxWins}}, {{tournamentCardsWon}}, {{tournamentBattleCount}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                        
+                        
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                        
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+     var ctx = document.getElementById('radar').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Battle Count', 'Wins', 'Three Crown Wins', 'Losse'],
+                datasets: [{
+                    data: [{{ battleCount }}, {{ wins }}, {{ threeCrownWins}}, {{ losses }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(231, 176, 231, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(231, 176, 231, 1)'
+            ],
+                borderWidth: 1
+            }]
+            },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+</script>

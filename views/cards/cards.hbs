@@ -5,13 +5,11 @@
 {{#each datos}}
 <div class="col-2">
     <div class="card" style="width: 10rem;">
-        <img src="{{iconUrls.medium}}" class="card-img-top" alt="...">
+        <img src="{{iconUrls.medium}}" class="card-img-top" alt="card">
         <div class="card-body">
             <h5 class="card-title">{{name}}</h5>
-            <p class="card-text"><strong>Max. Level : </strong>{{maxLevel}}</p>
-            {{!-- {{#if isCheck}} --}}
+            <p class="card-text"><strong> Max. Level : </strong>{{maxLevel}}</p>
             <a href="/cards/{{id}}" class="btn btn-dark " id="btnLike">like</a>
-            {{!-- {{/if}} --}}
         </div>
     </div>
 </div>

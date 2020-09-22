@@ -6,14 +6,13 @@ const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.r
     message: 'You must log in to continue'
 })
 
-const checkUser = (req, res, next) => req.isAuthenticated() ? next() : null
-
 router.get('/', (req, res) => res.render('index'))
+
 router.get('/profile', checkLoggedIn, (req, res) => {
     
     const arrayCards = []
     const user = req.user
-    //console.log(user)
+
     user.cards.forEach(cardId => {
         Card.findOne({ id: cardId })
             .then(card => {
@@ -25,9 +24,5 @@ router.get('/profile', checkLoggedIn, (req, res) => {
     
    res.render('profile/user-profile', { user, arrayCards })
 })
-
-//router.get('/cards/:id', checkUser, (req, res) => req.user)
-    
-
 
 module.exports = router
