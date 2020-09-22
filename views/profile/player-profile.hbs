@@ -1,1 +1,124 @@
-<h1>Estoy en Player-Profile!!!!!!</h1>
+<div class="container">
+    <div class="row playerTitle">
+        <h1>Welcome {{name}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-4 icon playerDefault" >
+            <hr>
+            <p><img src ="/images/explevel.png" alt="Exp level"><strong> Exp. Level: </strong>{{expLevel}}</p>
+            <hr>
+            <p><img src="/images/trophy (1).png" alt="trophy"><strong> Trophies: </strong>{{trophies}}</p>
+            <hr>
+            <p><img src="/images/exp.png" alt="clan"><strong> Clan: </strong>{{clan.name}}</p>
+            <hr>
+            <p><img src="https://cdn.royaleapi.com/static/img/ui/people.png?t=655d74ddf722b295b010e92d7495a3e21d178cb0" alt="role"><strong> Role: </strong>{{role}}</p>
+            <hr>
+        </div>
+        <div class="col-8 divDeck" >
+            <div class="row">
+                {{#each currentDeck}}
+                <div class="col-3" style="padding: 5px;">
+                    <div class="card playerDeck" style="width: 9rem;">
+                        <img src="{{iconUrls.medium}}" class="card-img-top" alt="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{name}}</h5>
+                            <p class="card-text"><strong>Level : </strong>{{level}} / {{maxLevel}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <canvas id="radar"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="polarArea"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="/javascripts/chartStyles.js"></script>
+<script>
+    
+  
+    
+    var ctx = document.getElementById('polarArea').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: [ 'Challenge Max Wins', 'Tournament Cards Won', 'Tournament Battle Count'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [ {{ challengeMaxWins}}, {{tournamentCardsWon}}, {{tournamentBattleCount}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                        
+                        
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                        
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+     var ctx = document.getElementById('radar').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Battle Count', 'Wins', 'Three Crown Wins', 'Losse'],
+                datasets: [{
+                    data: [{{ battleCount }}, {{ wins }}, {{ threeCrownWins}}, {{ losses }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(231, 176, 231, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(231, 176, 231, 1)'
+            ],
+                borderWidth: 1
+            }]
+            },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+</script>

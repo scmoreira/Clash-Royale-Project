@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const cardSchema = new Schema({
     name: String,
     id: Number,
-    maxlevel: String,
+    maxLevel: String,
     iconUrls: {
         medium: String
     }

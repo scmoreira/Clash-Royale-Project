@@ -5,10 +5,7 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     username: String,
     password: String,
-    cards: [{
-        type: Schema.Types.ObjectID,
-        ref: 'Card'
-    }]
+    cards: [Number]
 }, {
     timestamps: true
 })
