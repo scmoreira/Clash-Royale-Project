@@ -1,20 +1,18 @@
 <div class="container justify-content-center">
     
-    <div class="row">
-        <div class="col-6">
+    <div class="row cardTittle">
+        <div class="col-6 cardTittle">
             <h1 class="card-title"> Clans list</h1>
         </div>
     </div>
 
     <div class="row">
         {{#each datos}}
-        <div class="col-3" style="margin: 10px 0;">
-            <div class="card" style="width: 16rem; align-items: center;">
-                <h4 class="card-title">{{name}}
-                    <hr>
-                </h4>
+        <div class="col-3 clan" style="margin: 10px 0;">
+            <div class="card clanCard" style="width: 16rem; align-items: center;">
+                <h4 class="card-title">{{name}} </h4>
 
-                <div class="card-body">
+                <div class="card-body cardInfo">
                     <p class="card-text icon"><img src="/images/trophy.png"><strong> War Trophies :
                         </strong>{{clanWarTrophies}}</p>
                     <p class="card-text icon"><img src="/images/trophy (1).png"><strong> Score : </strong>{{clanScore}}
