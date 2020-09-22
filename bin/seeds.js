@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Location = require('../models/location.model.js')
 
-mongoose.connect('mongodb://localhost/Clash-royal-project', {
+mongoose.connect('mongodb+srv://admin_scmoreira:MongoDB@2020@cluster0.tg2ev.mongodb.net/test', {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })
