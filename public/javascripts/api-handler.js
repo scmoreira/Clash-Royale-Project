@@ -13,5 +13,5 @@ class RoyaleApiHandler {
         return data
     }
 
-    getAllCard = () => this.app('cards')
+    // getAllCard = () => this.app('cards')
 }
