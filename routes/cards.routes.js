@@ -39,31 +39,36 @@ axios(config)
 //   no tocar lo de arriba
 
 
+// axios.get(royaleApi)
+//     .then(function (response) { 
+//         datos = response.data.items8
+//         console.log(response.data.items[0]);
+//     })
+//     .catch(function (error) { console.log(error);});
+
+
+
 //let isCheck = checkLoggedIn
-// axios({
-//     royaleApi
-//         .getAllCard()
+// axios.get(royaleApi)
+//         getAllCard()
 //         .then(elm => console.log(elm))
-// })
+
 
 
 router.get('/', (req, res) => {  
+
     res.render('cards/cards.hbs', { datos })
-    //console.log('Esto es datos',datos)
+
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', checkLoggedIn,(req, res, next) => {
     const cardId = req.params.id
-    const userId = req.user.id
-    //console.log(cardId)
-    if (userId) {
+    const userId = req.user.id 
+    
        User.findById(userId)
         .then(user => user.updateOne({ $addToSet: { cards: cardId } }))
         .then(() => res.redirect('/cards'))
         .catch(err => next(err)) 
-    } else {
-        res.redirect('/cards')
-    }
     
 })
 

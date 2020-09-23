@@ -7,10 +7,10 @@ const data = qs.stringify({})
 
 const config = {
     method: "get",
-    url: "https://api.clashroyale.com/v1/clans?minScore=57000&limit=12",
+    url: "https://api.clashroyale.com/v1/clans?minScore=57000&limit=20",
     headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.API_KEY}`
+        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjdjNDk2ZDQwLWJhNDgtNDBkZC1iN2U5LWQ1NzI0YjNlZmQxZCIsImlhdCI6MTYwMDg3NDE4Miwic3ViIjoiZGV2ZWxvcGVyLzYxNTQ1NTdkLTgyNGYtNzdiYS1jM2JmLWEwOTg0NTc5OGJhMCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI1Mi4xOS4xNzIuMjQiLCI0Ny42Mi4xNjIuMjI0IiwiODEuMC4yLjIzOCJdLCJ0eXBlIjoiY2xpZW50In1dfQ.ljKTZffVhGNGrDh7nSXKBRTdZs3lRB3EaZsy-uVRbdElNnfCVj4BhVHAqp1WPygSr2s-pZQAiKYc37svw8SzhQ'
     },
     data: data,
 }
