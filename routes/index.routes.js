@@ -86,33 +86,25 @@ router.post('/ranking', (req, res, next) => {
 })
 
 router.get('/profile', checkLoggedIn, (req, res) => {
-    
-    let arrayCards 
-    const user = req.user
 
-   async function searchCards(user) {
-        user.cards.forEach(cardId => {
-            Card.findOne({ id: cardId })
-                .then(card => {
-                    arrayCards = arrayCards.push(card)
-                    return arrayCards
-                })
-        })  
-       await res.render('profile/user-profile', { user, arrayCards })
-    }
-    searchCards(user)
- 
+    const user = req.user;
+    let arrayCards = []
+       
+   user.cards.forEach(cardId => {
+        Card.findOne({ id: cardId })
+            .then(card => {              
+                arrayCards.push(card)
+                return arrayCards
+            })
+            .catch(err => next(err))
+   })
     
-    // user.cards.forEach(cardId => {
-    //     Card.findOne({ id: cardId })
-    //         .then(card => {              
-    //             arrayCards.push(card)
-    //             return arrayCards
-    //         })
-    //         .catch(err => next(err))
-    // })
-    
+    res.render('profile/user-profile', {user, arrayCards})
     
 })
+   
+    
+
+
 
 module.exports = router

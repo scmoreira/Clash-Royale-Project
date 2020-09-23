@@ -179,4 +179,33 @@ canvas {
 .clan {
   height: 250px; }
 
+.chart {
+  margin: 40px 0; }
+  .chart canvas {
+    background-color: #e2f8ff; }
+
+.statistics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px; }
+  .statistics h3 {
+    justify-content: center;
+    align-items: center;
+    font-family: 'Wendy One', sans-serif;
+    font-weight: 700;
+    font-size: 4.5em;
+    color: rgba(241, 239, 105, 0.849);
+    -webkit-text-stroke: 1px black; }
+
+.welcome {
+  margin-right: 15px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Wendy One', sans-serif;
+  font-weight: 700;
+  font-size: 4.5em;
+  color: rgba(241, 239, 105, 0.849);
+  -webkit-text-stroke: 1px black; }
+
 /*# sourceMappingURL=style.css.map */

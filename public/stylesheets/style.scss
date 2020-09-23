@@ -140,7 +140,6 @@ h1, h2, h3 {
   }
 }
 
-
 .divDeck{
   background-image: url(/images/backgroundWood.jpg);
   border-top-right-radius: 10px;
@@ -232,4 +231,40 @@ canvas{
 
 .clan{
   height: 250px;
+}
+.chart{
+  canvas{
+    background-color: #e2f8ff;
+  }
+  
+  margin: 40px 0;
+}
+
+.statistics{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  h3{
+    justify-content: center;
+    align-items: center;
+    font-family: 'Wendy One',
+    sans-serif;
+    font-weight: 700;
+    font-size: 4.5em;
+    color: rgba(241, 239, 105, 0.849);
+    -webkit-text-stroke: 1px black;
+  }
+}
+
+.welcome{
+  margin-right: 15px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Wendy One',
+  sans-serif;
+  font-weight: 700;
+  font-size: 4.5em;
+  color: rgba(241, 239, 105, 0.849);
+  -webkit-text-stroke: 1px black;
 }
