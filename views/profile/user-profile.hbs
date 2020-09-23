@@ -1,25 +1,31 @@
+<div></div>
 <div class="container">
     <div class="row">
-        <div class="col-6">
-            <h1>Welcome {{user.username}}</h1>
+        <div class="col-12">
+            <span class="welcome">Welcome </span><span class="span"> {{user.username}}</span>
         </div>
-        <div class="col-6 d-flex justify-content-end">
+        <div class="col-12 d-flex navUser">
             <form action="/profile/player" method="post">
                 <label>Insert your player tag</label>
                 <input id="playerTag" type='text' name="tag" placeholder="#975A1R">
                 <input type="submit" value="Go" class="btn btn-md btn-dark ">
             </form>
-            <a class="btn btn-dark btn-md btnEdit"  href="/profile/edit/{{user.id}}" > Edit </a>                                
+            <a class="btn btn-dark btn-md btnEdit"  href="/profile/edit/{{user.id}}" >Edit profile</a>                                
         </div>        
     </div>
     <hr>
+</div >
+<div class="container">
+    <div class="row cardTittle">
+        <h1 class="userCards" style="font-size: 3em;">Your favourite cards</h5>
+    </div>
 </div>
-<h5 class="userCards">Your favourite cards</h5>
+
 <div class="container userDeck" id="userDeck">
     <div class="row">
         {{#each arrayCards}}
         <div class="col-2 deckUser">
-            <div class="card" style="width: 9rem;">
+            <div class="card playerDeck" style="width: 9rem;">
                 <img src="{{iconUrls.medium}}" class="card-img-top" alt="card">
                 <div class="card-body">
                     <h5 class="card-title">{{name}}</h5>

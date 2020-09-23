@@ -1,11 +1,23 @@
 const { ObjectID } = require("mongodb")
 const mongoose = require("mongoose")
+const { stringify } = require("qs")
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-    username: String,
-    password: String,
-    cards: [Number]
+    username: { 
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    cards: [Number],
+    role: {
+        type: String,
+        default: 'user'
+    }
 }, {
     timestamps: true
 })
