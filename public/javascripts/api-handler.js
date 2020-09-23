@@ -12,6 +12,6 @@ class RoyaleApiHandler {
         })
         return data
     }
-
+//cambiossss
     // getAllCard = () => this.app('cards')
 }
