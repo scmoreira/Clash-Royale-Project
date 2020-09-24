@@ -805,6 +805,7 @@ const cards = [{
 
 Card.create(cards)
     .then(allCards => console.log(allCards.length, 'cards have been created'))
+    .then(() => mongoose.connection.close())
     .catch(err => console.log(err))
 
 

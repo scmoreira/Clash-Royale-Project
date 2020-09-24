@@ -19,7 +19,8 @@ h1, h2, h3 {
   font-weight: 400;
   text-align: center;
   padding: 10px 0;
-  margin-top: 5px; }
+  margin-top: 5px;
+  width: 70%; }
 
 .glide img {
   width: 100%;
@@ -123,6 +124,9 @@ h1, h2, h3 {
     align-items: center;
     padding: 5px 0px; }
 
+.backgroundCard {
+  background-color: #d0fdd0; }
+
 .divDeck {
   background-image: url(/images/backgroundWood.jpg);
   border-top-right-radius: 10px;
@@ -162,7 +166,7 @@ canvas {
     font-family: 'Wendy One', sans-serif;
     font-weight: 700;
     font-size: 4.5em;
-    color: rgba(241, 239, 105, 0.849);
+    color: #ee8a48;
     -webkit-text-stroke: 1px black;
     margin-bottom: 30px; }
 
@@ -177,7 +181,7 @@ canvas {
   font-family: 'Wendy One', sans-serif; }
 
 .clanCard {
-  background-color: rgba(214, 241, 245, 0.589);
+  background-color: rgba(214, 241, 245, 0.829);
   height: 250px; }
   .clanCard h4 {
     margin-top: 10px;
@@ -215,7 +219,7 @@ canvas {
     font-family: 'Wendy One', sans-serif;
     font-weight: 700;
     font-size: 4.5em;
-    color: rgba(241, 239, 105, 0.849);
+    color: #ee8a48;
     -webkit-text-stroke: 1px black; }
 
 .welcome {
@@ -225,7 +229,7 @@ canvas {
   font-family: 'Wendy One', sans-serif;
   font-weight: 700;
   font-size: 4.5em;
-  color: rgba(241, 239, 105, 0.849);
+  color: #ee8a48;
   -webkit-text-stroke: 1px black; }
 
 .span {
@@ -292,5 +296,39 @@ footer {
 
 .electrico {
   background-image: url(../images/electrico.png); }
+
+.esqueleto {
+  background-position: right;
+  background-size: 60%;
+  background-image: url(../images/esqueleto.png); }
+
+.peka img {
+  margin-right: 80px;
+  margin-left: 80px;
+  width: 35%; }
+
+.peka .displayNone {
+  display: none; }
+
+.rowDetails {
+  padding: 0 40px;
+  background-image: url("../images/murcielagos.png"); }
+
+.clanDetails {
+  padding: 20px;
+  margin: 40px 0 40px 40px; }
+  .clanDetails h1 {
+    font-size: 3em;
+    font-weight: 700; }
+  .clanDetails h3 {
+    font-weight: 400; }
+  .clanDetails .divClanDetails {
+    margin: 20px 40px 0 40px; }
+
+.detailsBody {
+  padding-left: 10px; }
+
+.esqueletos {
+  background-image: url("../images/esqueletos.png"); }
 
 /*# sourceMappingURL=style.css.map */

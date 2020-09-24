@@ -13,11 +13,8 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    cards: [Number],
-    role: {
-        type: String,
-        default: 'user'
-    }
+    cards: [Number]
+    
 }, {
     timestamps: true
 })
