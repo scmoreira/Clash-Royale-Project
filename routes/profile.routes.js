@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
-
-const axios = require('axios')
-const qs = require('qs')
-const data = qs.stringify({})
-
 const User = require('../models/user.model')
-const Card = require('../models/card.model')
-const Location = require('../models/location.model')
+
+const api = require('../configs/api.config')
+const royaleApi = new api()
 
 router.get("/:id", (req, res, next) => {
     res.render("profile/user-profile");
@@ -38,19 +34,17 @@ router.post("/edit/:id", (req, res, next) => {
         .catch((err) => next("Error :", err));
 });
 
+
 router.get('/delete/:id', (req, res, next) => {
 
     const cardId = req.params.id
     const userId = req.user.id
 
     User.findById(userId)
-        .then(user => user.updateOne({
-            $pull: {
-                cards: cardId
-            }
-        }))
+        .then(user => user.updateOne({ $pull: { cards: cardId }}))
         .catch(err => next(err))
-    res.redirect('/profile')
+    
+    res.redirect('/profile') //revisar para poner en una promesa
 
 })
 
@@ -62,21 +56,10 @@ router.post('/player', (req, res, next) => {
         id = id.slice(1)
     }
 
-    const config = {
-      method: "get",
-      url: `https://api.clashroyale.com/v1/players/%23${id}`,
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${process.env.API_KEY}`,
-      },
-      data: data,
-    };
-
-    axios(config)
-        .then(function (response) {
-            let dataPlayer = response.data
-            res.render('profile/player-profile', dataPlayer)
-        })
+    royaleApi
+        .getPlayerDetails(id)
+        .then(response => response.data)
+        .then(dataPlayer => res.render('profile/player-profile', dataPlayer))
         .catch(err => next(err))
 })
 

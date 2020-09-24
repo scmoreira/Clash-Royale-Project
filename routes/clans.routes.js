@@ -10,7 +10,7 @@ const config = {
     url: "https://api.clashroyale.com/v1/clans?minScore=57000&limit=12",
     headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.API_KEY}`
+        Authorization: `Bearer ${process.env.API_KEY}` 
     },
     data: data,
 }
@@ -18,23 +18,32 @@ const config = {
 let datos;
 
 axios(config)
-  .then(function (response) { datos = response.data.items })
-  .catch(err => console.log(error))
+    .then(function (response) {
+        datos = response.data.items
+    })
+    .catch(err => console.log(error))
 
-router.get("/", (req, res) => { res.render("clans/clans.hbs", { datos })})
-  
+router.get("/", (req, res) => {
+    res.render("clans/clans.hbs", {
+        datos
+    })
+})
+
 router.post("/details", (req, res, next) => {
-  axios(getClanConfig(req))
+    axios(getClanConfig(req))
         .then(function (response) {
             let dataClan = response.data
             axios(getFlagConfig(dataClan.location.name))
                 .then(function (value) {
                     let countryFlag = value.data[0].flag
-                    res.render("clans/clan-details.hbs", { dataClan, countryFlag })
+                    res.render("clans/clan-details.hbs", {
+                        dataClan,
+                        countryFlag
+                    })
                 })
                 .catch(err => next(err))
-       })
-       .catch(err => next(err))
+        })
+        .catch(err => next(err))
 })
 
 function getClanConfig(req) {
@@ -60,5 +69,5 @@ function getFlagConfig(country) {
     };
     return config1
 }
-  
+
 module.exports = router

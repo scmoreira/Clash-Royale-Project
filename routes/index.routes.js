@@ -1,11 +1,14 @@
 const express = require('express')
 const router = express.Router()
+
+const Card = require('../models/card.model')
+const User = require('../models/user.model')
+const Location = require('../models/location.model')
+
 const axios = require('axios')
 const qs = require('qs')
 const data = qs.stringify({})
 
-const Card = require('../models/card.model')
-const Location = require('../models/location.model')
 
 const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.render('auth/login', {
     message: 'You must log in to continue'
@@ -13,94 +16,8 @@ const checkLoggedIn = (req, res, next) => req.isAuthenticated() ? next() : res.r
 
 router.get('/', (req, res) => res.render('index'))
 
-router.get('/profile', checkLoggedIn, (req, res) => {
-    
-    const arrayCards = []
-    const user = req.user
-
-    user.cards.forEach(cardId => {
-        Card.findOne({ id: cardId })
-            .then(card => {
-                arrayCards.push(card)
-                return arrayCards
-            })
-            .catch(err => next(err))
-    })
-
-    res.render("profile/user-profile", { user, arrayCards })
-
-})
- 
-
-// router.get('/profile', checkLoggedIn, (req, res) => {
-
-//     const user = req.user
-//     const arrayCards = []
-
-//     const cards = user.cards
-
-//     function findCards(user) {
-//         cards.forEach(cardId => {
-//             const card = Card.findOne({ id: cardId })
-//             arrayCards.push(card)
-//         })
-//         .then(() => res.render("profile/user-profile", {
-//             user,
-//             arrayCards
-//         }))
-//     }
-// })
-
-
-
-
-
-
-// router.get("/profile", checkLoggedIn, (req, res) => {
-//   //const arrayCards = [];
-//     const user = req.user;
-//     let arrayCards = [];
-//   function searchCards(user) {
-//     user.cards.forEach((cardId) => {
-//         Card.findOne({ id: cardId })
-//             .then((card) => {
-//                 arrayCards.push(card);
-//                 return arrayCards;
-//       });
-//     });
-//   }
-//   const p1 = searchCards(user);
-//   const p2 = 
-
-//   Promise.all([p1]).then(result => res.render("profile/user-profile", { user, arrayCards: result[0] }));
-
-// });
-
-// router.get('/profile', checkLoggedIn, (req, res) => {
-
-//     const arrayCards = []
-//     const user = req.user
-//     async function searchCards(user) {
-//         user.cards.forEach(cardId => {
-//             Card.findOne({
-//                     id: cardId
-//                 })
-//                 .then(card => {
-//                     arrayCards.push(card)
-//                     return arrayCards
-//                 })
-//         })
-//         await res.render('profile/user-profile', {
-//             user,
-//             arrayCards
-//         })
-//     }
-//     searchCards(user)
-
-// })
-
+//Buscar ranking por País
 router.get('/ranking', (req, res, next) => res.render('rankings'))
-
 router.post('/ranking', (req, res, next) => {
 
     const input = req.body.location
@@ -110,8 +27,6 @@ router.post('/ranking', (req, res, next) => {
 
     Location.findOne({
             name: country
-        }, {
-            id: 1
         })
         .then(location => {
             id = location.id
@@ -141,14 +56,14 @@ router.post('/ranking', (req, res, next) => {
 
         .then(() => {
             const config = {
-                method: "get",
+                method: 'get',
                 url: `https://api.clashroyale.com/v1/locations/${id}/rankings/players?limit=10`,
                 headers: {
-                    Accept: "application/json",
-                    Authorization: `Bearer ${process.env.API_KEY}`
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${process.env.API_KEY}`
                 },
-                data: data,
-            };
+                data: data
+            }
 
             let rankingPlayers
 
@@ -168,6 +83,32 @@ router.post('/ranking', (req, res, next) => {
         .catch(err => res.render("rankings", {
             errorMsg: "Country not found!"
         }))
+})
+
+router.get('/profile', checkLoggedIn, (req, res) => {
+
+    const user = req.user
+    
+    function searchCard(user) {
+
+        user.cards.forEach(cardId => {
+            let arrayCards = []
+            Card.findOne({ id: cardId })
+                .then(card => arrayCards.push(card))
+                .then((cards) => cards = arrayCards)
+    
+        })
+
+        res.render('profile/user-profile', { user, arrayCards: cards })
+        
+    }   
+    
+
+    searchCard(user)
+      
+    
+    
+    
 })
 
 module.exports = router

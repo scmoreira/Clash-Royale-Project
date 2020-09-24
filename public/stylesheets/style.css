@@ -1,5 +1,6 @@
 body {
-  font-weight: 200; }
+  font-weight: 200;
+  font-family: 'Roboto Slab', serif; }
 
 h1, h2, h3 {
   font-weight: 200; }
@@ -129,5 +130,53 @@ h1, h2, h3 {
 
 canvas {
   width: 100%; }
+
+.cardTittle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .cardTittle h1 {
+    justify-content: center;
+    align-items: center;
+    font-family: 'Wendy One', sans-serif;
+    font-weight: 700;
+    font-size: 4.5em;
+    color: rgba(241, 239, 105, 0.849);
+    -webkit-text-stroke: 1px black;
+    margin-bottom: 30px; }
+
+.btnLike {
+  position: absolute;
+  top: 0.2em;
+  left: 0.2em;
+  border-radius: 50px;
+  color: white;
+  text-transform: uppercase;
+  padding: 0px 7px;
+  font-family: 'Wendy One', sans-serif; }
+
+.clanCard {
+  background-color: rgba(214, 241, 245, 0.589);
+  height: 250px; }
+  .clanCard h4 {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cecdcd;
+    width: 100%;
+    text-align: center; }
+  .clanCard form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; }
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.clan {
+  height: 250px; }
 
 /*# sourceMappingURL=style.css.map */
