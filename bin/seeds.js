@@ -1572,4 +1572,5 @@ const locations = [{
 
 Location.create(locations)
     .then(allLocations => console.log(allLocations.length, ' location have been created'))
+    .then(() => mongoose.connection.close())
     .catch(err => console.log(err))

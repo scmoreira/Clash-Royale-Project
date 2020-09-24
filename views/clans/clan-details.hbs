@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-flex clanDetails">
     <div class="row">
 
         <h1>{{dataClan.name}}</h1>
@@ -40,13 +40,13 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row rowDetails">
         {{#each dataClan.memberList}}
-        <div class=" col-4 card w-50">
+        <div class=" col-3 card divClanDetails" style="width: 5rem;">
             <div class="card-body">
                 <h5 class="card-title">{{name}}</h5>
                 <hr>
-                <div class="row">
+                <div class="row detailsBody">
                     <div class="col-6 icon" style="padding: 0px;">
                         <p class="card-text icon">
                             <img src="https://cdn.royaleapi.com/static/img/ui/people.png?t=655d74ddf722b295b010e92d7495a3e21d178cb0"><strong>

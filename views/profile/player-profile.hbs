@@ -55,9 +55,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script>
-    
-  
-    
     var ctx = document.getElementById('polarArea').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'polarArea',
@@ -70,14 +67,11 @@
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)'
-                        
-                        
                     ],
                     borderColor: [
                         'rgba(255, 99, 132, 1)',
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)'
-                        
                     ],
                     borderWidth: 1
                 }]
@@ -98,7 +92,6 @@
                 }
             }
         });
-
 
      var ctx = document.getElementById('bar').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -161,15 +154,15 @@
                         barPercentage: 0.4,
                         borderWidth: 1,
                 },{
-                        label: 'Line Dataset',
-                        data: [{{ leagueStatistics.currentSeason.bestTrophies }}, {{ leagueStatistics.previousSeason.bestTrophies }}, {{ leagueStatistics.bestSeason.trophies }}],
-                        borderColor:['rgba(71, 235, 60, 1)', 'rgba(71, 235, 60, 1)', 'rgba(71, 235, 60, 1)'],
-                        fill: false,
-                        pointStyle: 'star',
-                        pointRadius: 5,
-                        type: 'line'
+                    label: 'Line Dataset',
+                    data: [{{ leagueStatistics.currentSeason.bestTrophies }}, {{ leagueStatistics.previousSeason.bestTrophies }}, {{ leagueStatistics.bestSeason.trophies }}],
+                    borderColor:['rgba(71, 235, 60, 1)', 'rgba(71, 235, 60, 1)', 'rgba(71, 235, 60, 1)'],
+                    fill: false,
+                    pointStyle: 'star',
+                    pointRadius: 5,
+                    type: 'line'
                 }],
-                labels: ['Current Season', 'Previous Season', 'Best Season'],
+                    labels: ['Current Season', 'Previous Season', 'Best Season'],
             },
         options: {
             scales: {
