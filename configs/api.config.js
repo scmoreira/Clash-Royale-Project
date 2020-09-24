@@ -18,6 +18,11 @@ class RoyaleApiHandler {
     getClans = () => this.config('/clans?minScore=57000&limit=20')
     getClanDetails = id => this.config(`/clans/%23${id}`)
     getPlayerDetails = id => this.config(`/players/%23${id}`)
+    getRankingClans = id => this.config(`/locations/${id}/rankings/clans?limit=20`)
+    getRankingPlayers = id => this.config(`/locations/${id}/rankings/players?limit=10`)
 }
 
 module.exports = RoyaleApiHandler;
+
+
+

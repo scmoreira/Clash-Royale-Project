@@ -1,69 +1,46 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
+const api = require('../configs/api.config')
 
-const axios = require("axios")
-const qs = require("qs")
+const axios = require('axios')
+const qs = require('qs')
 const data = qs.stringify({})
 
-const config = {
-    method: "get",
-    url: "https://api.clashroyale.com/v1/clans?minScore=57000&limit=12",
-    headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${process.env.API_KEY}` 
-    },
-    data: data,
-}
+const royaleApi = new api()
 
-let datos;
-
-axios(config)
-    .then(function (response) {
-        datos = response.data.items
-    })
-    .catch(err => console.log(error))
-
-router.get("/", (req, res) => {
-    res.render("clans/clans.hbs", {
-        datos
-    })
+router.get('/', (req, res) => {
+    royaleApi
+        .getClans()
+        .then(response => response.data.items)
+        .then(datos => res.render('clans/clans', { datos }))
+        .catch(err => console.log(err))
 })
-
-router.post("/details", (req, res, next) => {
-    axios(getClanConfig(req))
-        .then(function (response) {
-            let dataClan = response.data
-            axios(getFlagConfig(dataClan.location.name))
-                .then(function (value) {
-                    let countryFlag = value.data[0].flag
-                    res.render("clans/clan-details.hbs", {
-                        dataClan,
-                        countryFlag
-                    })
-                })
-                .catch(err => next(err))
-        })
-        .catch(err => next(err))
-})
-
-function getClanConfig(req) {
+  
+router.post('/details', (req, res, next) => {
     const input = req.body.tag
     let id = input.slice(1)
-    const config = {
-        method: "get",
-        url: `https://api.clashroyale.com/v1/clans/%23${id}`,
-        headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${process.env.API_KEY}`
-        },
-        data: data,
-    }
-    return config
-}
+    let dataClan
+    let countryFlag
+    royaleApi
+        .getClanDetails(id)
+        .then(response => {
+           dataClan = response.data
+            return dataClan
+        })
+        .then(() => axios(getFlagConfig(dataClan.location.name)))
+        .then(loc => {
+            countryFlag = loc.data[0].flag
+            return countryFlag
+        })
+        .then(() => res.render('clans/clan-details',{dataClan, countryFlag}))
+        .catch(err => next(err))
+   
+})
 
+// Restcountries API request
 function getFlagConfig(country) {
     const config1 = {
-        method: "get",
+        method: 'get',
         url: `https://restcountries.eu/rest/v2/name/${country}`,
         data: data,
     };
